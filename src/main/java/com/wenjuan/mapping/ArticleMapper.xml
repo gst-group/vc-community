@@ -1,0 +1,723 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.wenjuan.model.Article">
+    <id column="article_id" property="id" jdbcType="INTEGER"/>
+    <result column="author" property="author" jdbcType="INTEGER"/>
+    <result column="title" property="title" jdbcType="VARCHAR"/>
+    <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    <result column="avai" property="avai" jdbcType="BIT"/>
+    <result column="status" property="status" jdbcType="TINYINT"/>
+    <result column="follow_count" property="followCount" jdbcType="INTEGER"/>
+    <result column="top" property="top" jdbcType="TIMESTAMP"/>
+    <result column="reply_count" property="replyCount" jdbcType="INTEGER"/>
+    <result column="publish_background" property="publishBackground" jdbcType="BIT"/>
+    <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+    <result column="pics" property="pics" jdbcType="LONGVARCHAR"/>
+    <result column="author_nickname" jdbcType="VARCHAR" property="authorNickname"/>
+    <result column="is_favor" jdbcType="BIT" property="favor"/>
+    <result column="viewed" jdbcType="BIT" property="viewed"/>
+    <result column="is_like" jdbcType="BIT" property="like"/>
+    <result column="group_id" jdbcType="INTEGER" property="groupId"/>
+    <result column="type" jdbcType="INTEGER" property="type"/>
+    <result column="Sensitive" jdbcType="INTEGER" property="Sensitive"/>
+  </resultMap>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" useCache="false">
+    select *
+    <if test="userId != null">
+      ,func_isFavorArticle(#{userId,jdbcType=INTEGER},id) is_favor
+      ,func_isViewArticle(#{userId,jdbcType=INTEGER},id) viewed
+      ,func_isLikeArticle(#{userId,jdbcType=INTEGER},id) `is_like`
+    </if>
+    from wj_view_article
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getFavorites" resultMap="BaseResultMap" parameterType="map">
+    SELECT  * from (select wvufa.*,u.nickname author_nickname,u.name author_name,
+    func_isFavorArticle(#{id,jdbcType=INTEGER},wvufa.article_id) is_favor,
+    func_isViewArticle(#{id,jdbcType=INTEGER},wvufa.article_id) viewed
+    ,func_isLikeArticle(#{userId,jdbcType=INTEGER},id) `is_like`
+    FROM wj_view_user_follow_article wvufa ,wj_user u WHERE userid = #{id,jdbcType=INTEGER} AND wvufa.author = u.id
+    <if test="comparator != null and articleid != null">
+      and article_id ${comparator} #{articleid}
+    </if>
+    ) a WHERE EXISTS(
+    SELECT id FROM wj_article WHERE EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and  wj_article.group_id=wj_group.id
+    ) and wj_article.id=a.article_id )
+    <if test="order != null and order != ''">
+      order by ${order}
+    </if>
+    limit 0,10
+  </select>
+  <select id="selectMyArticles" resultMap="BaseResultMap" useCache="false">
+    select *
+    from
+    (SELECT *,if(top is null,0,1) istop
+    from wj_view_article
+    WHERE author = #{userId,jdbcType=INTEGER}
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+    order by top desc,id desc
+    <if test="startIndex != null">
+      limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+    </if>
+    ) a
+
+    where EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=a.group_id
+    )
+
+    order by istop desc
+    <if test="order != null and order != ''">
+      ,${order}
+    </if>
+  </select>
+  <select id="selectMyArticlesCount" resultType="int" useCache="false">
+    select *
+    from wj_view_article
+    WHERE author = #{userId,jdbcType=INTEGER}
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+  </select>
+  <!--0.0-->
+  <select id="selectArticles" resultMap="BaseResultMap">
+    select *
+    <if test="userId != null">
+      ,func_isFavorArticle(#{userId,jdbcType=INTEGER},id) is_favor
+      ,func_isViewArticle(#{userId,jdbcType=INTEGER},id) viewed
+      ,func_isLikeArticle(#{userId,jdbcType=INTEGER},id) `is_like`
+    </if>
+    from
+    ( SELECT *,if(top is null,0,1) istop
+    from wj_view_article
+    WHERE 1 = 1
+
+    and ( type=0 or type is null
+    or author=${uid} )
+    and type!=3
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+
+    <if test="id !=0">
+      and (top is null or top = 0)
+    </if>
+    and EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=wj_view_article.group_id
+    )
+    order by top desc,id desc
+    <if test="startIndex != null">
+      limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+    </if>
+    ) a
+    order by istop desc
+    <if test="order != null and order != ''">
+      , ${order}
+    </if>
+  </select>
+  <select id="selectArticlesCount" resultType="int">
+    select count(*)
+    from wj_article
+    WHERE 1 = 1
+
+    and (type=0 or type is null
+    or author=${uid})
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+    <if test="userId != null AND (containMine == null or containMine)">
+      AND author != #{userId}
+    </if>
+    and EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=wj_article.group_id
+    )
+
+  </select>
+  <select id="selectVisibleArticle" resultMap="BaseResultMap">
+    select *
+    from
+    (SELECT *,if(top is null,0,1) istop
+    from wj_view_article_default_visible
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      WHERE id ${comparator} ${id}
+    </if>
+    order by top desc,id desc
+    <if test="startIndex != null">
+      limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+    </if>
+    ) a
+
+    where EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=a.group_id
+    )
+    order by istop desc
+    <if test="order != null and order != ''">
+      , ${order}
+    </if>
+  </select>
+  <select id="selectVisibleArticleCount" resultType="int">
+    select *
+    from wj_view_article_default_visible
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+
+    <if test="comparator != null and id != null">
+      WHERE id ${comparator} ${id}
+      and EXISTS(
+      SELECT id from wj_group where ogid=#{ogid}
+      and wj_group.id=wj_view_article_default_visible.group_id
+      )
+    </if>
+
+  </select>
+  <select id="selectVisibleArticleByUser" resultMap="BaseResultMap" useCache="false">
+    select *
+    <if test="userId != null">
+      ,func_isFavorArticle(#{userId,jdbcType=INTEGER},id) is_favor
+      ,func_isViewArticle(#{userId,jdbcType=INTEGER},id) viewed
+    </if>
+    from
+    (select *,if(top is null,0,1) istop
+    from wj_view_article_visible
+    WHERE user_id = #{userId,jdbcType=INTEGER}
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+    order by top desc,id desc
+    <if test="startIndex != null">
+      limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+    </if>
+    ) a
+
+    where EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=a.group_id
+    )
+    order by istop desc
+    <if test="order != null and order != ''">
+      , ${order}
+    </if>
+  </select>
+  <select id="selectVisibleArticleByUserCount" resultType="int" useCache="false">
+    select count(*)
+    from wj_view_article_visible
+    WHERE user_id = #{userId,jdbcType=INTEGER}
+    <if test="grpId != null">
+      AND group_id = #{grpId,jdbcType=INTEGER}
+    </if>
+    <if test="comparator != null and id != null">
+      AND id ${comparator} ${id}
+    </if>
+    and EXISTS(
+    SELECT id from wj_group where ogid=#{ogid}
+    and wj_group.id=wj_view_article_visible.group_id
+    )
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    DELETE FROM wj_article
+    WHERE id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.wenjuan.model.Article">
+    <selectKey resultType="java.lang.Integer" keyProperty="id">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into wj_article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="author != null">
+        author,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="avai != null">
+        avai,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="followCount != null">
+        follow_count,
+      </if>
+      <if test="top != null">
+        top,
+      </if>
+      <if test="replyCount != null">
+        reply_count,
+      </if>
+      <if test="publishBackground != null">
+        publish_background,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="pics != null">
+        pics,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="sensitive != null">
+        `sensitive`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="author != null">
+        #{author,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="avai != null">
+        #{avai,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="followCount != null">
+        #{followCount,jdbcType=INTEGER},
+      </if>
+      <if test="top != null">
+        #{top,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyCount != null">
+        #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishBackground != null">
+        #{publishBackground,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pics != null">
+        #{pics,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type},
+      </if>
+      <if test="sensitive != null">
+        #{sensitive},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.Article">
+    update wj_article
+    <set>
+      <if test="author != null">
+        author = #{author,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="avai != null">
+        avai = #{avai,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="followCount != null">
+        follow_count = #{followCount,jdbcType=INTEGER},
+      </if>
+      <if test="top != null">
+        top = #{top,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyCount != null">
+        reply_count = #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="publishBackground != null">
+        publish_background = #{publishBackground,jdbcType=BIT},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="pics != null">
+        pics = #{pics,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null">
+        type= #{type},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="toggleVisible" parameterType="java.lang.Integer">
+    UPDATE wj_article
+    SET avai = CASE
+               WHEN avai = 0
+                 THEN
+                   1
+               ELSE 0
+               END
+    WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="articleSearch" parameterType="map" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    WHERE content LIKE #{content,jdbcType=VARCHAR} OR id IN (SELECT article
+                                                             FROM wj_comment_article
+                                                             WHERE content LIKE #{content,jdbcType=VARCHAR})
+    ORDER BY ${order}
+  </select>
+  <select id="articleFY" parameterType="java.util.Map" resultType="com.wenjuan.model.Article">
+    SELECT
+      *,
+      if(top IS NULL, 0, 1) istop
+    FROM wj_view_article
+    where type = #{type}
+          and
+
+          EXISTS(
+                  select id from wj_group where (ogid=(
+                    select id from organizationGroup where OAdmin=#{uid}
+                  ) or 1=(
+                    select extra from wj_user where id=#{uid}
+                  ))
+                                                and
+                                                wj_view_article.group_id=wj_group.id
+
+          )
+    ORDER BY top DESC, id DESC
+    LIMIT #{begin}, #{end}
+  </select>
+  <update id="toggleTop" parameterType="java.lang.Integer">
+    UPDATE wj_article
+    SET top = CASE
+              WHEN top IS NULL
+                THEN
+                  CURRENT_TIMESTAMP
+              ELSE NULL
+              END
+    WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="articleSearch2" parameterType="map" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    WHERE (content LIKE concat('%', #{content}, '%') OR
+          title LIKE concat('%', #{content}, '%') OR
+          author IN (SELECT id
+                     FROM wj_user
+                     WHERE name LIKE concat('%', #{content}, '%') OR nickname LIKE concat('%', #{content}, '%') OR
+                           realname LIKE concat('%', #{content}, '%'))
+          OR id IN (SELECT article
+                    FROM wj_comment_article
+                    WHERE content LIKE concat('%', #{content}, '%'))
+          OR group_id IN (SELECT id
+                          FROM wj_group
+                          WHERE name LIKE concat('%', #{content}, '%'))
+    )and
+
+             EXISTS(
+                     select id from wj_group where (ogid=(
+                       select id from organizationGroup where OAdmin=#{uid}
+                     ) or 1=(
+                       select extra from wj_user where id=#{uid}
+                     ))
+                                                   and
+                                                   wj_article.group_id=wj_group.id
+
+             )
+
+    ORDER BY ${order}
+    LIMIT #{begin}, #{end}
+  </select>
+  <select id="articleSearch2Count" parameterType="map" resultType="int">
+    SELECT count(*)
+    FROM wj_article
+    WHERE (content LIKE concat('%', #{content}, '%') OR title LIKE concat('%', #{content}, '%') OR
+           author IN (SELECT id
+                      FROM wj_user
+                      WHERE name LIKE concat('%', #{content}, '%') OR nickname LIKE concat('%', #{content}, '%') OR
+                            realname LIKE concat('%', #{content}, '%'))
+           OR id IN (SELECT article
+                     FROM wj_comment_article
+                     WHERE content LIKE concat('%', #{content}, '%'))
+           OR group_id IN (SELECT id
+                           FROM wj_group
+                           WHERE name LIKE concat('%', #{content}, '%'))
+          ) and
+
+          EXISTS(
+                  select id
+                  from wj_group
+                  where (ogid = (
+                    select id
+                    from organizationGroup
+                    where OAdmin = #{uid}
+                  ) or 1 = (
+                    select extra
+                    from wj_user
+                    where id = #{uid}
+                  ))
+                        and
+                        wj_article.group_id = wj_group.id
+
+          )
+  </select>
+  <!--  -->
+  <select id="getLike" parameterType="map" resultType="com.wenjuan.model.UserFollowArticle">
+    SELECT *
+    FROM wj_user_follow_article
+    WHERE articleid = #{aid}
+    ORDER BY time
+    LIMIT #{begin}, #{end}
+  </select>
+  <select id="getLikeCount" parameterType="map" resultType="int">
+    SELECT count(*)
+    FROM wj_user_follow_article
+    WHERE articleid = #{aid}
+  </select>
+  <select id="all" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    ORDER BY time DESC
+  </select>
+  <select id="articleCount" parameterType="int" resultType="int">
+    SELECT count(*)
+    FROM wj_article
+    where type=#{type}
+  </select>
+  <select id="getArticleTitle" parameterType="java.lang.String" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    WHERE title LIKE concat('%', #{content}, '%')
+  </select>
+
+  <select id="selectByid" parameterType="java.lang.String" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    WHERE id = #{id}
+  </select>
+  <select id="selectArticlesCountByGroup" parameterType="map" resultType="java.util.HashMap">
+    select a.group_id, count(*) count
+    from wj_article a
+    <if test="comparator != null and id != null">
+      WHERE id ${comparator} ${id}
+    </if>
+    GROUP BY a.group_id
+  </select>
+  <!-- 最近一个月的发布数量 -->
+  <select id="selectMMCount" parameterType="int" resultType="com.wenjuan.model.Article">
+    SELECT *
+    FROM wj_article
+    WHERE date_sub(curdate(), INTERVAL 30 DAY) &lt;= date(time) AND author = #{uid};
+  </select>
+  <!--本月发帖数-->
+  <select id="ArticleCountBen" resultType="int" parameterType="int">
+    SELECT count(*)
+    FROM wj_article
+    WHERE author = #{id} AND
+          date_format(time, '%Y-%m') = date_format(now(), '%Y-%m')
+  </select>
+  <!--上月发帖数-->
+  <select id="ArticleCountShang" resultType="int" parameterType="int">
+    SELECT count(*)
+    FROM wj_article
+    WHERE author = #{id} AND PERIOD_DIFF(date_format(now(), '%Y%m'),
+                                         date_format(time, '%Y%m')) = 1
+  </select>
+  <select id="topCount" parameterType="java.lang.String" resultType="int">
+    SELECT count(*)
+    FROM wj_article
+    WHERE top IS NOT NULL AND group_id = #{gid}
+  </select>
+  <select id="getPushList" parameterType="java.util.Map" resultType="com.wenjuan.model.Article">
+SELECT *
+
+from (
+       sELECT
+         a.*, IFNULL(b.loveCount, 0) loveCount
+       FROM
+         (
+           SELECT DISTINCT
+             *
+           FROM
+             (
+               (
+                 SELECT
+                   wa.*, count(*) read_count
+                 FROM
+                   wj_log_user_view_article,
+                   (
+                     SELECT
+                       a.id,
+                       author,
+                       title,
+                       content,
+                       time,
+                       avai,
+                       STATUS,
+                       follow_count,
+                       top,
+                       pics,
+                       publish_background,
+                       group_id,
+                       type,
+                       `sensitive`,
+                       b.count AS reply_count
+                     FROM
+                       wj_article a,
+                       (
+                         SELECT
+                           count(*) count,
+                           article id
+                         FROM
+                           wj_comment_article
+                         WHERE
+                           (type = 0 OR commenter =#{uid})
+                           AND (
+                             comment_to NOT IN (
+                               SELECT
+                                 id
+                               FROM
+                                 wj_comment_article
+                               WHERE
+                                 commenter !=#{uid}
+                                 AND type != 0
+                                 and type!=3
+                             )
+                             OR comment_to IS NULL
+                           )
+                           and type!=3
+                         GROUP BY
+                           article
+                       ) b
+                     WHERE
+                       a.id = b.id
+                   ) wa
+                 WHERE
+                   article_id = wa.id
+                   AND wa.`sensitive` != '1'
+                 GROUP BY
+                   article_id
+                 ORDER BY
+                   count(*) DESC
+                 LIMIT 5
+               )
+               UNION
+               (
+                 SELECT
+                   wa.*, count(*) read_count
+                 FROM
+                   wj_log_user_view_article,
+                   (
+                     SELECT
+                       a.id id,
+                       author,
+                       title,
+                       content,
+                       time,
+                       avai,
+                       STATUS,
+                       follow_count,
+                       top,
+                       pics,
+                       publish_background,
+                       group_id,
+                       type,
+                       `sensitive`,
+                       b.count AS reply_count
+                     FROM
+                       wj_article a,
+                       (
+                         SELECT
+                           count(*) count,
+                           article id
+                         FROM
+                           wj_comment_article
+                         WHERE
+                           (type = 0 OR commenter =#{uid})
+                           AND (
+                             comment_to NOT IN (
+                               SELECT
+                                 id
+                               FROM
+                                 wj_comment_article
+                               WHERE
+                                 commenter !=#{uid}
+                                 AND type != 0
+                                 and type!=3
+                             )
+                             OR comment_to IS NULL
+                           )
+                           and type!=3
+
+                         GROUP BY
+                           article
+                       ) b
+                     WHERE
+                       a.id = b.id
+                   ) wa
+                 WHERE
+                   article_id = wa.id
+                   AND wa.`sensitive` != '1'
+                 GROUP BY
+                   article_id
+                 ORDER BY
+                   reply_count DESC
+                 LIMIT 5
+               )
+             ) a
+
+         ) a
+         LEFT JOIN (
+                     SELECT
+                       article_id,
+                       count(user_id) loveCount
+                     FROM
+                       wj_user_like_article
+                     GROUP BY
+                       article_id
+                   ) b ON a.id = b.article_id) temp1
+where EXISTS (
+        select id from wj_group where ogid=#{ogid}
+                                      and temp1.group_id=wj_group.id
+)
+
+
+
+
+
+  </select>
+
+<!--获取赞的用户-->
+  <select id="getLikeArticleList" parameterType="int" resultType="com.wenjuan.model.User">
+  SELECT * from wj_user u LEFT JOIN wj_user_like_article e on u.id=e.user_id where article_id=#{aid}
+  </select>
+</mapper>

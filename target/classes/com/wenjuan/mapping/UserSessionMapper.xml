@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserSessionMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserSession">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="token" property="token" jdbcType="CHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_session
+        where user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteOutOfDate">
+        DELETE FROM wj_session WHERE timestampdiff(SECOND,time,current_timestamp) &gt; 3600
+    </delete>
+    <delete id="deleteByUserId" parameterType="java.lang.Integer">
+        DELETE FROM wj_session
+        WHERE user_id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.UserSession">
+        insert into wj_session (user_id, token
+        )
+        values (#{userId,jdbcType=INTEGER}, #{token,jdbcType=CHAR}
+        )
+        ON DUPLICATE KEY UPDATE time = CURRENT_TIMESTAMP ,token = #{token,jdbcType=CHAR}
+    </insert>
+    <insert id="update" parameterType="com.wenjuan.model.UserSession">
+        UPDATE wj_session SET
+        time = CURRENT_TIMESTAMP WHERE user_id = #{userId,jdbcType=INTEGER}
+    </insert>
+</mapper>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.DiaryCommentMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.DiaryComment">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="comment_to" jdbcType="INTEGER" property="commentTo"/>
+        <result column="commenter" jdbcType="INTEGER" property="commenter"/>
+        <result column="diary" jdbcType="INTEGER" property="diary"/>
+        <result column="time" jdbcType="TIMESTAMP" property="time"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+        <result column="comment_base" jdbcType="INTEGER" property="commentBase"/>
+    </resultMap>
+    <resultMap id="ViewResultMap" type="com.wenjuan.vo.DiaryCommentView">
+        <result column="id" property="id" jdbcType="INTEGER"/>
+        <result column="commenter_id" property="commenterId" jdbcType="INTEGER"/>
+        <result column="commenter_name" property="commenterName" jdbcType="VARCHAR"/>
+        <result column="commenter_avatar" property="commenterAvatar" jdbcType="VARCHAR"/>
+        <result column="commenter_nickname" property="commenterNickname" jdbcType="VARCHAR"/>
+        <result column="diary" property="diary" jdbcType="INTEGER"/>
+        <result column="comment_to_id" property="commentToId" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+        <result column="commenter_role" property="commenterRole" jdbcType="TINYINT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="comment_to_name" property="commentToName" jdbcType="VARCHAR"/>
+        <result column="comment_to_nickname" property="commentToNickname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_view_diary_comment
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByDiaryId" resultMap="ViewResultMap" parameterType="map">
+        select *
+        from wj_view_diary_comment
+        WHERE diary = #{id,jdbcType=INTEGER}
+        <if test="topLevel">
+            and comment_to_id is null
+        </if>
+        ORDER BY time asc
+    </select>
+    <select id="selectNewComment" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_view_user_msg_diary
+        WHERE author = #{userId,jdbcType=INTEGER}
+    </select>
+    <select id="selectCommentAfter" resultMap="ViewResultMap" parameterType="map">
+        SELECT *
+        FROM wj_view_diary_comment
+        WHERE diary = #{diaryId,jdbcType=INTEGER} AND id > #{lastCommentId,jdbcType=INTEGER}
+              AND comment_to_id IS NULL
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM wj_comment_diary
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.DiaryComment">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into wj_comment_diary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="commentTo != null">
+                comment_to,
+            </if>
+            <if test="commenter != null">
+                commenter,
+            </if>
+            <if test="diary != null">
+                diary,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="commentBase != null">
+                comment_base,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="commentTo != null">
+                #{commentTo,jdbcType=INTEGER},
+            </if>
+            <if test="commenter != null">
+                #{commenter,jdbcType=INTEGER},
+            </if>
+            <if test="diary != null">
+                #{diary,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=BIT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="commentBase != null">
+                #{commentBase,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.DiaryComment">
+        update wj_comment_diary
+        <set>
+            <if test="commentTo != null">
+                comment_to = #{commentTo,jdbcType=INTEGER},
+            </if>
+            <if test="commenter != null">
+                commenter = #{commenter,jdbcType=INTEGER},
+            </if>
+            <if test="diary != null">
+                diary = #{diary,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=BIT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="commentBase != null">
+                comment_base = #{commentBase,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="getCommentFY" parameterType="java.util.Map" resultMap="ViewResultMap">
+        SELECT *
+        FROM wj_view_diary_comment
+        WHERE diary = #{id}
+        ORDER BY time DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="diaryCommentCount" resultType="int">
+        SELECT count(*)
+        FROM wj_comment_diary
+    </select>
+    <select id="selectTopComment" resultMap="ViewResultMap" parameterType="map">
+        SELECT *
+        FROM wj_view_diary_comment
+        WHERE diary = #{diaryId,jdbcType=INTEGER}
+              AND comment_to_id IS NULL
+        ORDER BY time DESC
+        LIMIT 0, #{count,jdbcType=INTEGER}
+    </select>
+    <select id="selectCommentUnderComment" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        SELECT DISTINCT *
+        FROM wj_view_diary_comment
+        WHERE comment_base = #{commentId,jdbcType=INTEGER} AND comment_to_id IS NOT NULL
+    </select>
+    <select id="selectCommentBaseComment" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        SELECT DISTINCT *
+        FROM wj_view_diary_comment
+        WHERE comment_base = #{commentId,jdbcType=INTEGER} OR id = #{commentId,jdbcType=INTEGER}
+        ORDER BY time
+    </select>
+    <select id="Usercomment" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_comment_diary
+        WHERE commenter = #{id}
+    </select>
+    <!--本月-->
+    <select id="getUsercomment" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_comment_diary
+        WHERE commenter = #{id} AND date_format(time, '%Y-%m') = date_format(now(), '%Y-%m')
+
+    </select>
+    <!-- 上月 -->
+    <select id="getUsercomment2" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_comment_diary
+        WHERE commenter = #{id} AND PERIOD_DIFF(date_format(now(), '%Y%m'), date_format(time, '%Y%m')) = 1
+
+    </select>
+
+
+    <update id="updateCommentViewTime" parameterType="java.lang.Integer">
+        UPDATE wj_user
+        SET view_reply_time_diary = CURRENT_TIME
+        WHERE id = #{#id,jdbcType=INTEGER}
+    </update>
+    <select id="selectMySendMsg" parameterType="map" resultType="com.wenjuan.model.Diary">
+        SELECT DISTINCT * FROM (
+        SELECT
+        if(wcd.comment_base is null,wcd.id,wcd.comment_base) extra, d.*
+        FROM wj_diary d, wj_comment_diary wcd
+        WHERE commenter = #{userId,jdbcType=INTEGER} AND wcd.diary = d.id
+        <if test="comparator != null and time != null">
+            AND unix_timestamp(wcd.time) ${comparator} #{time}
+        </if>
+        GROUP BY d.id,wcd.id
+        order by max(wcd.time) desc
+        )a
+        where ogid=#{ogid}
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectMyReceiveMsg" parameterType="map" resultType="com.wenjuan.model.Diary">
+        SELECT DISTINCT *
+        FROM (SELECT
+        a.*,
+        if(wvdc.comment_base IS NULL, wvdc.id, wvdc.comment_base) extra
+        FROM wj_diary a, wj_view_diary_comment wvdc
+        WHERE wvdc.diary = a.id AND wvdc.commenter_id != #{userId,jdbcType=INTEGER}
+        AND ((wvdc.comment_to_user_id is null AND a.author = #{userId,jdbcType=INTEGER}) OR wvdc.comment_to_user_id =
+        #{userId,jdbcType=INTEGER})
+        <if test="time != null">
+            and unix_timestamp(wvdc.time) ${comparator} #{time}
+        </if>
+        and ogid=#{ogid}
+        GROUP BY a.id,wvdc.id
+        order by max(wvdc.time) desc
+        ) a
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectMyReceiveMsgCount" parameterType="map" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM wj_diary a, wj_view_diary_comment wvdc
+        WHERE wvdc.diary = a.id and wvdc.commenter_id != #{userId,jdbcType=INTEGER} AND ((wvdc.comment_to_user_id is
+        null AND a.author = #{userId,jdbcType=INTEGER}) OR
+        wvdc.comment_to_user_id = #{userId,jdbcType=INTEGER})
+        and ogid=#{ogid}
+        <if test="time != null">
+            and unix_timestamp(wvdc.time) ${comparator} #{time}
+        </if>
+    </select>
+    <select id="selectLastNewCommentBaseUser" parameterType="map" resultMap="ViewResultMap">
+        SELECT *
+        FROM wj_view_diary_comment
+        WHERE commenter_id = #{userId} AND (comment_base = #{commentBase} OR id = #{commentBase})
+        <if test="comparator != null and time != null">
+            and unix_timestamp(time) ${comparator} ${time}
+        </if>
+        ORDER BY time DESC
+        LIMIT 0, 1
+    </select>
+</mapper>

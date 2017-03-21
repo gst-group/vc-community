@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.OrganizationUserMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.OrganizationUser">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ogid" property="og" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.wenjuan.model.OrganizationUser">
+            insert INTO organizationUser(ogid,uid) VALUES (#{ogid},#{uid})
+    </insert>
+    <select id="getCountByUidAndOgid" parameterType="java.util.Map" resultType="int">
+    SELECT  count(1) from  organizationUser where uid=#{uid} and ogid=#{ogid}
+    </select>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserLikeArticleMapper">
+  <select id="selectByPrimaryKey" resultType="com.wenjuan.model.UserLikeArticle"
+          parameterType="com.wenjuan.model.UserLikeArticle">
+    SELECT *
+    FROM wj_user_like_article
+    WHERE article_id = #{articleId} AND user_id = #{userId}
+  </select>
+  <select id="getListCountByArticle" parameterType="map" resultType="com.wenjuan.model.UserLikeArticle">
+    select *
+    from wj_user_like_article WHERE  article_id = #{aid}
+    LIMIT #{begin},#{end}
+  </select>
+  <select id="selectFollowInfo" parameterType="map" resultType="com.wenjuan.model.UserFollowArticle">
+    SELECT *
+    FROM wj_view_user_like_article
+    WHERE 1=1
+    and EXISTS(
+    SELECT * from wj_article where EXISTS(
+    SELECT * from wj_group where ogid=#{ogid}
+    and wj_group.id=wj_article.group_id
+    ) and wj_view_user_like_article.article_id=wj_article.id
+    )
+    <if test="comparator != null and time != null">
+      AND unix_timestamp(time) ${comparator} ${time}
+    </if>
+    <choose>
+      <when test="followed == null || !followed ">
+        AND userid = #{userId,jdbcType=INTEGER}
+      </when>
+      <otherwise>
+        AND author = #{userId,jdbcType=INTEGER}
+      </otherwise>
+    </choose>
+    <if test="order != null and order != ''">
+      order by ${order}
+    </if>
+    <if test="startIndex != null">
+      limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="getLikeCountByArticle" parameterType="int" resultType="java.lang.Integer">
+    SELECT count(*) FROM wj_user_like_article WHERE article_id = #{article}
+  </select>
+  <insert id="insert" parameterType="com.wenjuan.model.UserLikeArticle">
+    INSERT INTO wj_user_like_article (article_id, user_id) VALUE (#{articleId}, #{userId})
+  </insert>
+  <delete id="deleteByPrimaryKey" parameterType="com.wenjuan.model.UserLikeArticle">
+    DELETE FROM wj_user_like_article
+    WHERE article_id = #{articleId} AND user_id = #{userId}
+  </delete>
+</mapper>

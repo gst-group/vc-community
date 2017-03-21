@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.ScoreHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.ScoreHistory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="event_id" property="eventId" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="score" property="score" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="ViewResultMap" type="com.wenjuan.model.ScoreHistory">
+        <result column="event_name" property="eventName" jdbcType="VARCHAR"/>
+        <result column="event_value" property="eventValue" jdbcType="INTEGER"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_score_history
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+        delete from wj_score_history
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.ScoreHistory">
+        insert into wj_score_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="eventId != null">
+                event_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="score != null">
+                score,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="eventId != null">
+                #{eventId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="score != null">
+                #{score,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectScoreHistories" resultMap="ViewResultMap">
+        SELECT
+        *
+        FROM wj_view_score_hsitory order by time desc
+    </select>
+    <select id="selectMyScoreHistories" resultMap="ViewResultMap" parameterType="map">
+        SELECT
+        *
+        FROM wj_view_score_hsitory
+        WHERE user_id = #{userId,jdbcType=INTEGER} AND score>0
+        <if test="comparator != null and time != null">
+            AND unix_timestamp(time) ${comparator} #{time}
+        </if>
+        <if test="order != null and order != ''">
+            order by ${order}
+        </if>
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="getScoreInfo" resultType="java.lang.String">
+        SELECT message from scoreInfo
+    </select>
+</mapper>

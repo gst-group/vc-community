@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.OrganizationGroupMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.OrganizationGroup">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="group" property="group" jdbcType="VARCHAR"/>
+        <result column="OAdmin" property="OAdmin" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.wenjuan.model.OrganizationGroup">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+            insert INTO organizationGroup(`group`,OAdmin) VALUES (#{group},#{OAdmin})
+    </insert>
+    <select id="selectByOAdmin" parameterType="int" resultType="int">
+        SELECT id from organizationGroup where OAdmin=#{uid}
+    </select>
+    <select id="selectOgid" parameterType="java.lang.String" resultType="int">
+        select id from organizationGroup where organizationGroup.group =#{group} LIMIT 1
+    </select>
+    <select id="getGroup" parameterType="int" resultType="java.lang.String">
+        SELECT `group` from organizationGroup where OAdmin=#{oid}
+    </select>
+</mapper>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.FeedbackMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.Feedback">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user" property="user" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="reply" property="reply" jdbcType="LONGVARCHAR"/>
+        <result column="reply_time" property="replyTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_feedback
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectMyFeedbacks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_feedback
+        WHERE user = #{id,jdbcType=INTEGER}
+        AND (status &amp; 2) = 0
+        order by time desc
+    </select>
+    <select id="selectFeedbacks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_feedback
+        <if test="status != null">
+            WHERE (status &amp; 2) = #{status,jdbcType=TINYINT}
+        </if>
+        order by time desc
+    </select>
+    <select id="selectUnrepliedFeedbacks" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_feedback
+        WHERE reply IS NULL
+        AND (status &amp; 2) = 0
+        order by time desc
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+
+        DELETE FROM wj_feedback
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.Feedback">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into wj_feedback
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="user != null">
+                user,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="reply != null">
+                reply,
+            </if>
+            <if test="replyTime != null">
+                reply_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="user != null">
+                #{user,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="reply != null">
+                #{reply,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="replyTime != null">
+                #{replyTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="toggleVisible" parameterType="java.lang.Integer">
+        UPDATE wj_feedback
+        SET status = (status &amp; 1) | (((status &amp; 2) &gt;&gt; 1 ) ^ 1) &lt;&lt; 1
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.Feedback">
+
+        update wj_feedback
+        <set>
+            <if test="user != null">
+                user = #{user,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="reply != null">
+                reply = #{reply,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="replyTime != null">
+                reply_time = #{replyTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="feedBackCount" resultType="int">
+        SELECT count(*)
+        FROM wj_feedback
+    </select>
+    <select id="feedBackListFy" parameterType="java.util.Map" resultType="com.wenjuan.model.Feedback">
+        SELECT *
+        FROM wj_feedback
+        ORDER BY time DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="UserfeedBackCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_feedback
+        WHERE user = #{id}
+    </select>
+    <!-- 查询本月数据 -->
+    <select id="getFeedBackCount" resultType="int" parameterType="int">
+        select count(*) from wj_feedback where user=#{id} and date_format(time,'%Y-%m')=date_format(now(),'%Y-%m')
+
+    </select>
+    <!-- 查询上月数据 -->
+    <select id="getFeedBackCount2" resultType="int" parameterType="int">
+        Select count(*) FROM wj_feedback Where user=#{id} and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) , date_format(
+        time, '%Y%m' ) ) =1
+    </select>
+
+    <select id="selectNewReplyFeedback" resultType="com.wenjuan.model.Feedback">
+        SELECT *
+        FROM wj_feedback
+        WHERE user = #{userId,jdbcType=INTEGER} AND status = 0 AND reply IS NOT NULL
+        <if test="comparator != null and time != null">
+            AND unix_timestamp(reply_time) ${comparator} #{time}
+        </if>
+        order by reply_time desc
+    </select>
+    <select id="selectNewReplyFeedbackCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_feedback
+        WHERE user = #{userId,jdbcType=INTEGER} AND status = 0 AND reply IS NOT NULL
+    </select>
+    <select id="feedbackSeachCount" resultType="int" parameterType="map">
+        SELECT count(*)
+        FROM wj_feedback
+        WHERE content LIKE concat('%', #{content}, '%') OR
+
+        user IN (SELECT id
+        FROM wj_user
+        WHERE name LIKE concat('%', #{content}, '%') OR nickname LIKE concat('%', #{content}, '%') OR
+        realname LIKE concat('%', #{content}, '%'))
+
+    </select>
+    <select id="feedbackSeach" resultType="com.wenjuan.model.Feedback" parameterType="map">
+        SELECT *
+        FROM wj_feedback
+        WHERE content LIKE concat('%', #{content}, '%') OR
+
+        user IN (SELECT id
+        FROM wj_user
+        WHERE name LIKE concat('%', #{content}, '%') OR nickname LIKE concat('%', #{content}, '%') OR
+        realname LIKE concat('%', #{content}, '%'))
+
+        ORDER BY time
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="FeedBackMM" parameterType="int" resultType="com.wenjuan.model.Feedback">
+        select * from wj_feedback where date_sub(curdate(), INTERVAL 30 DAY) &lt;= date(time) and `user`=#{uid};
+    </select>
+</mapper>

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.NotifiesMapper">
+    <select id="selectByPrimaryKey" resultType="com.wenjuan.model.Notifies" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_notifys
+        WHERE id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM wj_notifys
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.Notifies">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into wj_notifys
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="platform != null">
+                platform,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="sendStatus != null">
+                send_status,
+            </if>
+            <if test="img != null">
+                img,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="platform != null">
+                #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sendStatus != null">
+                #{sendStatus,jdbcType=INTEGER},
+            </if>
+            <if test="img != null">
+                #{img,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="selectNotifys" resultType="com.wenjuan.model.Notifies" parameterType="java.util.Map">
+        SELECT *
+        FROM wj_notifys
+        ORDER BY create_time DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="count" resultType="int">
+        SELECT count(*)
+        FROM wj_notifys
+    </select>
+    <select id="selectNotifyViews" resultType="com.wenjuan.model.NotifiesUserView">
+        select *
+        from wj_view_notifies_user
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+        <if test="comparator != null and id != null">
+            AND notify_id ${comparator} #{id}
+        </if>
+        <if test="order != null and order != ''">
+            order by ${order}
+        </if>
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <insert id="insertNotifyUserByList">
+        INSERT ignore INTO wj_notifys_user(nid,uname) VALUES
+        <foreach collection="notifiesUsers" index="index" item="item" separator=",">
+            (#{item.nid},#{item.uname})
+        </foreach>
+    </insert>
+    <select id="selectNotifysSeach" resultType="com.wenjuan.model.Notifies" parameterType="java.util.Map">
+        SELECT *
+        FROM wj_notifys
+        WHERE content LIKE concat('%', #{key}, '%') OR title LIKE concat('%', #{key}, '%')
+        ORDER BY create_time DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="countSeach" resultType="int" parameterType="java.lang.String">
+        SELECT count(*)
+        FROM wj_notifys
+        WHERE content LIKE concat('%', #{key}, '%') OR title LIKE concat('%', #{key},
+                                                                         '%')
+    </select>
+    <select id="selectPushCount" parameterType="map" resultType="int">
+        select count(*)
+        from wj_view_notifies_user
+        WHERE name = #{userName,jdbcType=INTEGER}
+        <if test="comparator != null and id != null">
+            AND notify_id ${comparator} #{id}
+        </if>
+    </select>
+</mapper>

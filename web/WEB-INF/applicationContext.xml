@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <mvc:annotation-driven conversion-service="conversionService">
+        <mvc:message-converters>
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter"/>
+            <bean id="mappingJacksonHttpMessageConverter"
+                  class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="supportedMediaTypes">
+                    <list>
+                        <value>text/json;charset=UTF-8</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="registerDefaultFormatters" value="false"/>
+        <property name="formatterRegistrars">
+            <set>
+                <bean class="org.springframework.format.datetime.DateFormatterRegistrar">
+                    <property name="formatter" ref="dateFormatter">
+                    </property>
+                </bean>
+            </set>
+        </property>
+    </bean>
+    <bean id="dateFormatter" class="org.springframework.format.datetime.DateFormatter">
+        <property name="pattern" value="yyyy-MM-dd"/>
+    </bean>
+    <mvc:default-servlet-handler/>
+    <mvc:interceptors>
+        <!--对客户端访问的校验-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.wenjuan.interceptor.ClientCheckInterceptor"/>
+        </mvc:interceptor>
+        <!--将处理过的当前user添加到session中-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/admin/login.do"/>
+            <mvc:exclude-mapping path="/admin/login2.do"/>
+
+            <mvc:exclude-mapping path="/user/login.do"/>
+            <mvc:exclude-mapping path="/user/register.do"/>
+            <mvc:exclude-mapping path="/user/findPassWord.do"/>
+
+            <bean class="com.wenjuan.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
+        <!--对管理员界面的校验-->
+        <mvc:interceptor>
+
+            <mvc:mapping path="/admin/**"/>
+            <mvc:exclude-mapping path="/admin/getSystem.do"/>
+            <mvc:exclude-mapping path="/admin/login.do"/>
+            <mvc:exclude-mapping path="/admin/JsonToAdminAdd.do"/>
+
+            <mvc:exclude-mapping path="/admin/login2.do"/>
+            <bean class="com.wenjuan.interceptor.AuthorityAdminInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+    <context:component-scan base-package="com.wenjuan"/>
+    <context:annotation-config/>
+
+    <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter"/>
+    <bean id="userUtil" class="com.wenjuan.utils.UserUtil" scope="request"/>
+    <bean class="com.wenjuan.utils.ApplicationContextUtil"/>
+    <!--错误处理的类-->
+    <bean class="com.wenjuan.VcbbsExceptionHandler"/>
+    <!-- 支持上传文件 -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    <!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" p:prefix="/page/"
+          p:suffix=".jsp"/>
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="classpath:com/wenjuan/properties/MysqlDB.properties" />
+    </bean>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!--<property name="url" value="jdbc:mysql://121.40.137.214:80:3306/wenjuanTWO?useSSL=false"/>-->
+        <property name="url" value="${Dburl}"/>
+        <property name="username" value="${userName}"/>
+        <property name="password" value="${passWord}"/>
+
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="${initialSize}"/>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="${maxIdle}"/>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="${minIdle}"/>
+        <property name="maxWaitMillis" value="${maxWaitMillis}"/>
+        <property name="defaultAutoCommit" value="${defaultAutoCommit}"/>
+        <property name="enableAutoCommitOnReturn" value="${enableAutoCommitOnReturn}"/>
+    </bean>
+
+    <!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:com/wenjuan/mapping/*.xml"/>
+        <property name="typeAliasesPackage" value="com.wenjuan.model"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+    </bean>
+
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.wenjuan.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--<mvc:interceptor>-->
+        <!--<mvc:mapping path="/**"/>-->
+        <!--<mvc:exclude-mapping path="/admin/login.do"/>-->
+        <!--<mvc:exclude-mapping path="/user/login.do"/>-->
+        <!--<mvc:exclude-mapping path="/user/register.do"/>-->
+        <!--<mvc:exclude-mapping path="/wx/**"/>-->
+        <!--<bean class="com.wenjuan.interceptor.UserInterceptor"/>-->
+    <!--</mvc:interceptor>-->
+</beans>

@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.DiaryMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.Diary">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="author" property="author" jdbcType="INTEGER"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <result column="follow_count" property="followCount" jdbcType="INTEGER"/>
+        <result column="reply_count" property="replyCount" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="pics" property="pics" jdbcType="LONGVARCHAR"/>
+        <result column="top" property="top" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ViewResultMap" type="com.wenjuan.vo.DiaryView" extends="BaseResultMap">
+        <result column="author_name" property="authorName" jdbcType="VARCHAR"/>
+        <result column="author_avatar" property="authorAvatar" jdbcType="VARCHAR"/>
+        <result column="author_nickname" property="authorNickname" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="ViewResultMap" parameterType="java.lang.Integer">
+        SELECT
+            d.*,
+            u.name     author_name,
+            u.avatar   author_avatar,
+            u.nickname author_nickname
+        FROM wj_diary d, wj_user u
+        WHERE d.id = #{id,jdbcType=INTEGER} AND d.author = u.id
+    </select>
+    <select id="selectDiaries" resultMap="ViewResultMap" parameterType="map">
+        select d.*,u.name author_name,u.avatar author_avatar,u.nickname author_nickname
+        from wj_diary d,wj_user u,wj_user reader
+        WHERE d.author = u.id AND reader.id = #{userId}
+        AND ((reader.add_background = 0 AND reader.add_background = u.add_background)
+        OR (reader.add_background = 1 AND
+        exists(SELECT * FROM wj_user_group g1  JOIN wj_user_group g2 ON g1.group_id = g2.group_id WHERE g1.user_id = u.id AND g2.user_id = reader.id)))
+        <if test="comparator != null and id != null">
+            AND d.id ${comparator} ${id}
+        </if>
+        and ogid=#{ogid}
+        <if test="order != null and order != ''">
+            order by ${order}
+        </if>
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectDiariesCount" resultType="java.util.Map" parameterType="map">
+        select count(*)
+        from wj_diary d,wj_user u,wj_user reader
+        WHERE d.author = u.id AND reader.id = #{userId}
+        AND ((reader.add_background = 0 AND reader.add_background = u.add_background)
+        OR (reader.add_background = 1 AND
+        exists(SELECT * FROM wj_user_group g1 JOIN wj_user_group g2 ON g1.group_id = g2.group_id WHERE g1.user_id = u.id AND g2.user_id = reader.id)))
+        <if test="comparator != null and id != null">
+            AND d.id ${comparator} ${id}
+        </if>
+        and ogid=#{ogid}
+    </select>
+    <select id="selectMyDiaries" resultMap="ViewResultMap" parameterType="map">
+        select d.*,u.name author_name,u.avatar author_avatar,u.nickname author_nickname
+        from wj_diary d,wj_user u
+        WHERE author = #{userId,jdbcType=INTEGER} AND d.author = u.id
+        <if test="comparator != null and id != null">
+            AND d.id ${comparator} ${id}
+        </if>
+        and ogid=#{ogid}
+        <if test="order != null and order != ''">
+            order by ${order}
+        </if>
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="selectMyDiariesCount" resultType="int" parameterType="map">
+        select count(*)
+        from wj_diary d,wj_user u
+        WHERE author = #{userId,jdbcType=INTEGER} AND d.author = u.id
+        <if test="comparator != null and id != null">
+            AND d.id ${comparator} ${id}
+        </if>
+        and ogid=#{ogid}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM wj_diary
+        WHERE id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.Diary">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into wj_diary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="followCount != null">
+                follow_count,
+            </if>
+            <if test="replyCount != null">
+                reply_count,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="pics != null">
+                pics,
+            </if>
+            <if test="top != null">
+                top,
+            </if>
+            <if test="ogid != null">
+                ogid,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <if test="followCount != null">
+                #{followCount,jdbcType=INTEGER},
+            </if>
+            <if test="replyCount != null">
+                #{replyCount,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="pics != null">
+                #{pics,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="top != null">
+                #{top,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ogid != null">
+                #{ogid},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.Diary">
+        update wj_diary
+        <set>
+            <if test="author != null">
+                author = #{author,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <if test="followCount != null">
+                follow_count = #{followCount,jdbcType=INTEGER},
+            </if>
+            <if test="replyCount != null">
+                reply_count = #{replyCount,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="pics != null">
+                pics = #{pics,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="top != null">
+                pics = #{top,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="toggleVisible" parameterType="java.lang.Integer">
+        UPDATE wj_diary
+        SET status = CASE
+                     WHEN status = 0
+                         THEN
+                             1
+                     ELSE 0
+                     END
+        WHERE id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectMyFavor" parameterType="java.util.Map" resultMap="BaseResultMap">
+        SELECT *
+        FROM wj_user, wj_user_follow_diary
+        WHERE id = userid AND userid = #{id,jdbcType=INTEGER}
+         and EXISTS(select id from wj_diary where ogid=#{ogid} and wj_diary.id=wj_user_follow_diary.diaryid)
+    </select>
+    <select id="diarySearch" resultType="com.wenjuan.model.Diary" parameterType="map">
+        SELECT * from wj_diary where content like #{content} or id in (SELECT diary from wj_comment_diary where content
+        like #{content})
+        and ogid=#{ogid}
+        <if test="order != null and order != ''">
+            order by ${order}
+        </if>
+        <if test="startIndex != null">
+            limit #{startIndex,jdbcType=INTEGER},#{pageLimited,jdbcType=INTEGER}
+        </if>
+    </select>
+    <select id="diaryFy" resultType="com.wenjuan.model.Diary" parameterType="java.util.Map">
+        SELECT *
+        FROM wj_diary
+        where ogid=#{ogid}
+        ORDER BY ${order} DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="diaryFyName" resultType="com.wenjuan.model.Diary" parameterType="java.util.Map">
+        SELECT *
+        FROM wj_diary d, wj_user u
+        WHERE d.author = u.id
+            and d.ogid=#{ogid}
+        ORDER BY CONVERT(u.nickname USING gbk) COLLATE gbk_chinese_ci ASC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="diaryCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_diary
+        WHERE status = 0
+        and ogid=#{ogid}
+        ;
+    </select>
+    <select id="diarySearch2" resultType="com.wenjuan.model.Diary" parameterType="java.util.Map">
+        SELECT *
+        FROM wj_diary
+        WHERE content LIKE concat('%', #{content}, '%')
+              OR id IN (SELECT diary
+                        FROM wj_comment_diary
+                        WHERE content LIKE concat('%', #{content}, '%'))
+              OR author IN (SELECT id
+                            FROM wj_user
+                            WHERE wj_user.realname LIKE concat('%', #{content}, '%') OR wj_user.nickname
+                                                                                        LIKE
+                                                                                        concat('%', #{content}, '%')
+        )
+            and ogid=#{ogid}
+        ORDER BY time
+        LIMIT #{begin}, #{end}
+    </select>
+
+    <select id="diarySearch2count" resultType="int" parameterType="java.util.Map">
+        SELECT count(*)
+        FROM wj_diary
+        WHERE content LIKE concat('%', #{content}, '%')
+              OR id IN (SELECT diary
+                        FROM wj_comment_diary
+                        WHERE content LIKE concat('%', #{content}, '%'))
+              OR author IN (SELECT id
+                            FROM wj_user
+                            WHERE wj_user.realname LIKE concat('%', #{content}, '%') OR wj_user.nickname
+                                                                                        LIKE
+                                                                                        concat('%', #{content}, '%')
+        )
+                 and ogid=#{ogid}
+
+
+    </select>
+
+    <update id="top" parameterType="java.util.Map">
+        UPDATE wj_diary
+        SET top = #{date}
+        WHERE id = #{id}
+    </update>
+</mapper>

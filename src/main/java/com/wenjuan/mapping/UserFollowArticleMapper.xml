@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserFollowArticleMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserFollowArticle">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <id column="articleid" property="articleId" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map">
+        select *
+        from wj_user_follow_article
+        where userid = #{userid,jdbcType=INTEGER}
+        and articleid = #{articleid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from wj_user_follow_article
+        where userid = #{userid,jdbcType=INTEGER}
+        and articleid = #{articleid,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.UserFollowArticle">
+        insert into wj_user_follow_article (userid, articleid)
+        values (#{userid,jdbcType=INTEGER}, #{articleId,jdbcType=INTEGER}
+        )
+    </insert>
+    <select id="selectFollowCount" parameterType="map" resultType="int">
+        SELECT count(*)
+        FROM wj_view_user_follow_article
+        WHERE author = #{userId}
+        <if test="comparator != null and time != null">
+            AND unix_timestamp(time) ${comparator} ${time}
+        </if>
+    </select>
+    <select id="FollowArticle" parameterType="map" resultType="int">
+        select count(*) from wj_view_user_follow_article where userid=#{uid} and article_id=#{aid}
+    </select>
+</mapper>

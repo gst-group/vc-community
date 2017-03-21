@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.SensitiveMapper">
+    <select id="selectSensitive" resultType="java.lang.String" parameterType="int">
+    SELECT  content from wj_SensitiveWord where ogid=#{ogid}
+    </select>
+    <update id="updateSensitive" parameterType="java.util.Map">
+        UPDATE wj_SensitiveWord set content=#{content}
+        where ogid=#{ogid}
+     </update>
+    <insert id="insert" parameterType="java.util.Map">
+      insert into wj_SensitiveWord(ogid) VALUES (#{ogid});
+    </insert>
+</mapper>

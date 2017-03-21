@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.ArticleEnableMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.ArticleEnable">
+        <id column="article_id" property="articleId" jdbcType="INTEGER"/>
+        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="enable" property="enable" jdbcType="BIT"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map">
+        select *
+        from wj_article_enable
+        where article_id = #{articleId,jdbcType=INTEGER}
+        and name = #{name,jdbcType=VARCHAR}
+        AND enable = #{enable,jdbcType=BIT}
+    </select>
+    <select id="getAvail" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        from wj_article_enable
+        where article_id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from wj_article_enable
+        where article_id = #{articleId,jdbcType=INTEGER}
+        and name = #{name,jdbcType=VARCHAR}
+        and enable = #{enable,jdbcType=BIT}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.ArticleEnable">
+        insert IGNORE into wj_article_enable (article_id, name, enable
+        )
+        values (#{articleId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{enable,jdbcType=BIT}
+        )
+    </insert>
+</mapper>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.HistoryMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.History">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="chat_type" property="chatType" jdbcType="VARCHAR"/>
+        <result column="from" property="from" jdbcType="VARCHAR"/>
+        <result column="to" property="to" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="msg_type" property="msgType" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_history
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from wj_history
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.History">
+        insert into wj_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="chatType != null">
+                chat_type,
+            </if>
+            <if test="from != null">
+                `from`,
+            </if>
+            <if test="to != null">
+                `to`,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="msgType != null">
+                msg_type,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="contentY != null">
+                content_y,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="chatType != null">
+                #{chatType,jdbcType=VARCHAR},
+            </if>
+            <if test="from != null">
+                #{from,jdbcType=VARCHAR},
+            </if>
+            <if test="to != null">
+                #{to,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgType != null">
+                #{msgType,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contentY != null">
+                #{contentY,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.History">
+        update wj_history
+        <set>
+            <if test="chatType != null">
+                chat_type = #{chatType,jdbcType=VARCHAR},
+            </if>
+            <if test="from != null">
+                from = #{from,jdbcType=VARCHAR},
+            </if>
+            <if test="to != null">
+                to = #{to,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgType != null">
+                msg_type = #{msgType,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contentY != null">
+                content_y = #{contentY,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="max" resultMap="BaseResultMap">
+        select * from wj_history
+        where time = (select max(time) from wj_history) LIMIT 0,1
+    </select>
+    <select id="getAll" resultType="com.wenjuan.model.History" parameterType="java.util.Map">
+        select * from wj_history order by time desc limit #{begin},#{end}
+    </select>
+    <select id="Count" resultType="int">
+        select count(*) from wj_history
+    </select>
+    <select id="getGroup" parameterType="java.lang.String" resultType="com.wenjuan.model.History">
+        SELECT * from wj_history where chat_type='groupchat' and wj_history.`to`='123' and date_sub(curdate(), INTERVAL
+        30 DAY) &lt;= date(time);
+    </select>
+    <select id="getMessage" resultType="com.wenjuan.model.History">
+        select * from wj_history where date_sub(curdate(), INTERVAL 30 DAY) &lt;= date(time);
+    </select>
+</mapper>

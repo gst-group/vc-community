@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.ChatHistoryMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.ChatHistory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="chat_type" property="chatType" jdbcType="VARCHAR"/>
+        <result column="from" property="from" jdbcType="VARCHAR"/>
+        <result column="to" property="to" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="msg_type" property="msgType" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="content_y" property="contentY" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_history
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectHistories" resultMap="BaseResultMap">
+        select *
+        from wj_history
+    </select>
+    <insert id="insert" parameterType="com.wenjuan.model.ChatHistory">
+        insert into wj_history (id, chat_type, `from`,
+        `to`, time, msg_type,
+        content, content_y)
+        values (#{id,jdbcType=INTEGER}, #{chatType,jdbcType=VARCHAR}, #{from,jdbcType=VARCHAR},
+        #{to,jdbcType=VARCHAR}, #{time,jdbcType=TIMESTAMP}, #{msgType,jdbcType=VARCHAR},
+        #{content,jdbcType=LONGVARCHAR}, #{contentY,jdbcType=LONGVARCHAR})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.ChatHistory">
+        update wj_history
+        set chat_type = #{chatType,jdbcType=VARCHAR},
+        `from` = #{from,jdbcType=VARCHAR},
+        `to` = #{to,jdbcType=VARCHAR},
+        time = #{time,jdbcType=TIMESTAMP},
+        msg_type = #{msgType,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

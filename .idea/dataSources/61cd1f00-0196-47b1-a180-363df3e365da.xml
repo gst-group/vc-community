@@ -1,0 +1,2688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - testVC@139.196.210.151">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="testVC">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="sys"/>
+    <schema id="6" name="wenjuan"/>
+    <schema id="7" name="wenjuan1"/>
+    <schema id="8" name="wenjuan100"/>
+    <schema id="9" name="wenjuan101"/>
+    <schema id="10" name="wenjuan102"/>
+    <schema id="11" name="wenjuan2"/>
+    <schema id="12" name="wenjuan3"/>
+    <schema id="13" name="wenjuan4"/>
+    <schema id="14" name="wenjuan5"/>
+    <schema id="15" name="wenjuan6"/>
+    <schema id="16" name="wenjuanTWO"/>
+    <table id="17" parent="1" name="scoreInfo"/>
+    <table id="18" parent="1" name="wj_SensitiveWord"/>
+    <table id="19" parent="1" name="wj_admin_record"/>
+    <table id="20" parent="1" name="wj_admin_undo_modify"/>
+    <table id="21" parent="1" name="wj_app_version"/>
+    <table id="22" parent="1" name="wj_article"/>
+    <table id="23" parent="1" name="wj_article_enable"/>
+    <table id="24" parent="1" name="wj_column"/>
+    <table id="25" parent="1" name="wj_column_value"/>
+    <table id="26" parent="1" name="wj_comment_article"/>
+    <table id="27" parent="1" name="wj_comment_diary"/>
+    <table id="28" parent="1" name="wj_config"/>
+    <table id="29" parent="1" name="wj_diary"/>
+    <table id="30" parent="1" name="wj_draft"/>
+    <table id="31" parent="1" name="wj_feedback"/>
+    <table id="32" parent="1" name="wj_good"/>
+    <table id="33" parent="1" name="wj_good_duihuan"/>
+    <table id="34" parent="1" name="wj_group"/>
+    <table id="35" parent="1" name="wj_help"/>
+    <table id="36" parent="1" name="wj_history"/>
+    <table id="37" parent="1" name="wj_log_user_login"/>
+    <table id="38" parent="1" name="wj_log_user_view_article"/>
+    <table id="39" parent="1" name="wj_log_user_view_diary"/>
+    <table id="40" parent="1" name="wj_notifys"/>
+    <table id="41" parent="1" name="wj_notifys_user"/>
+    <table id="42" parent="1" name="wj_ocenter_district">
+      <comment>中国省市区乡镇数据表</comment>
+    </table>
+    <table id="43" parent="1" name="wj_score_config"/>
+    <table id="44" parent="1" name="wj_score_history"/>
+    <table id="45" parent="1" name="wj_session"/>
+    <table id="46" parent="1" name="wj_tableManage"/>
+    <table id="47" parent="1" name="wj_user"/>
+    <table id="48" parent="1" name="wj_user_follow_article"/>
+    <table id="49" parent="1" name="wj_user_follow_diary"/>
+    <table id="50" parent="1" name="wj_user_group"/>
+    <table id="51" parent="1" name="wj_verify_code"/>
+    <table id="52" parent="1" name="wj_weixin"/>
+    <table id="53" parent="1" name="wj_user_like_article"/>
+    <view id="54" parent="1" name="wj_view_article">
+      <comment>VIEW</comment>
+    </view>
+    <view id="55" parent="1" name="wj_view_article_comment">
+      <comment>VIEW</comment>
+    </view>
+    <view id="56" parent="1" name="wj_view_article_default_visible">
+      <comment>VIEW</comment>
+    </view>
+    <view id="57" parent="1" name="wj_view_article_visible">
+      <comment>VIEW</comment>
+    </view>
+    <view id="58" parent="1" name="wj_view_column_info">
+      <comment>VIEW</comment>
+    </view>
+    <view id="59" parent="1" name="wj_view_diary_comment">
+      <comment>VIEW</comment>
+    </view>
+    <view id="60" parent="1" name="wj_view_follow_user">
+      <comment>VIEW</comment>
+    </view>
+    <view id="61" parent="1" name="wj_view_good_duihuan">
+      <comment>VIEW</comment>
+    </view>
+    <view id="62" parent="1" name="wj_view_notifies_user">
+      <comment>VIEW</comment>
+    </view>
+    <view id="63" parent="1" name="wj_view_score_hsitory">
+      <comment>VIEW</comment>
+    </view>
+    <view id="64" parent="1" name="wj_view_user">
+      <comment>VIEW</comment>
+    </view>
+    <view id="65" parent="1" name="wj_view_user_follow_article">
+      <comment>VIEW</comment>
+    </view>
+    <view id="66" parent="1" name="wj_view_user_follow_diary">
+      <comment>VIEW</comment>
+    </view>
+    <view id="67" parent="1" name="wj_view_user_msg_article">
+      <comment>VIEW</comment>
+    </view>
+    <view id="68" parent="1" name="wj_view_user_msg_diary">
+      <comment>VIEW</comment>
+    </view>
+    <view id="69" parent="1" name="wj_view_user_like_article">
+      <comment>VIEW</comment>
+    </view>
+    <routine id="70" parent="1" name="func_getLocationStr">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <routine id="71" parent="1" name="func_isFavorArticle">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <routine id="72" parent="1" name="func_isFavorDiary">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <routine id="73" parent="1" name="func_isViewArticle">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <routine id="74" parent="1" name="func_isViewDiary">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <routine id="75" parent="1" name="func_isLikeArticle">
+      <routine-kind>FUNCTION</routine-kind>
+    </routine>
+    <column id="76" parent="17" name="ScoreInfoid">
+      <data-type>int(255)|0</data-type>
+    </column>
+    <column id="77" parent="17" name="message">
+      <data-type>varchar(4000)|0</data-type>
+    </column>
+    <column id="78" parent="18" name="id">
+      <comment>敏感词</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(10)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="79" parent="18" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <key id="80" parent="18" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="81" parent="19" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="82" parent="19" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="83" parent="19" name="description">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="84" parent="19" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="85" parent="19" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="86" parent="19" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="87" parent="19" name="wj_admin_record_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="88" parent="20" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="89" parent="20" name="user_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="90" parent="20" name="admin_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="91" parent="20" name="source">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="92" parent="20" name="dest">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <index id="93" parent="20" name="admin_id">
+      <columns>admin_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="94" parent="20" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="95" parent="20" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="96" parent="20" name="wj_admin_undo_modify_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="97" parent="20" name="wj_admin_undo_modify_ibfk_2">
+      <columns>admin_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="98" parent="21" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="99" parent="21" name="version_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="100" parent="21" name="version_code">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="101" parent="21" name="update_log">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="102" parent="21" name="update_time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="103" parent="21" name="platform">
+      <comment>发布平台，1为android，2为apple</comment>
+      <data-type>tinyint(2)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="104" parent="21" name="url">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="105" parent="21" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="106" parent="22" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="107" parent="22" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="108" parent="22" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="109" parent="22" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="110" parent="22" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="111" parent="22" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="112" parent="22" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="113" parent="22" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="114" parent="22" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="115" parent="22" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="116" parent="22" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="117" parent="22" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="118" parent="22" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <index id="119" parent="22" name="author">
+      <columns>author</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="120" parent="22" name="group">
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="121" parent="22" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="122" parent="22" name="wj_article_ibfk_1">
+      <columns>author</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="123" parent="22" name="wj_article_ibfk_2">
+      <columns>group_id</columns>
+      <ref-key>~.wj_group.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="124" parent="22" name="trigger_article_ai">
+      <trig-events>U</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="125" parent="23" name="article_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="126" parent="23" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="127" parent="23" name="enable">
+      <comment>1为组允许,2为用户</comment>
+      <mandatory>1</mandatory>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;2&apos;</default-expression>
+    </column>
+    <key id="128" parent="23" name="PRIMARY">
+      <columns>article_id
+name
+enable</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="129" parent="23" name="wj_article_enable_ibfk_1">
+      <columns>article_id</columns>
+      <ref-key>~.wj_article.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="130" parent="24" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="131" parent="24" name="name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="132" parent="24" name="tableid">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="133" parent="24" name="type">
+      <comment>0为整形，1为字符串</comment>
+      <data-type>tinyint(4)|0</data-type>
+    </column>
+    <key id="134" parent="24" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="135" parent="25" name="valueid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="136" parent="25" name="uid">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="137" parent="25" name="cid">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="138" parent="25" name="cvalue">
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <index id="139" parent="25" name="cid">
+      <columns>cid</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="140" parent="25" name="uid">
+      <columns>uid</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="141" parent="25" name="PRIMARY">
+      <columns>valueid</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="142" parent="25" name="wj_column_value_ibfk_2">
+      <columns>uid</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="143" parent="25" name="wj_column_value_ibfk_1">
+      <columns>cid</columns>
+      <ref-key>~.wj_column.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="144" parent="26" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="145" parent="26" name="comment_to">
+      <comment>回复的评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="146" parent="26" name="article">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="147" parent="26" name="commenter">
+      <comment>评论用户</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="148" parent="26" name="content">
+      <comment>评论内容(文字)</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="149" parent="26" name="pics">
+      <comment>图片路径，以冒号为分隔符</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="150" parent="26" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="151" parent="26" name="status">
+      <comment>1表示删除该评论，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="152" parent="26" name="comment_base">
+      <comment>评论的根评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <index id="153" parent="26" name="article">
+      <columns>article</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="154" parent="26" name="commenter">
+      <columns>commenter</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="155" parent="26" name="comment_to">
+      <columns>comment_to</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="156" parent="26" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="157" parent="26" name="wj_comment_article_ibfk_1">
+      <columns>comment_to</columns>
+      <ref-key>PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>set_null</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="158" parent="26" name="wj_comment_article_ibfk_2">
+      <columns>article</columns>
+      <ref-key>~.wj_article.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="159" parent="26" name="wj_comment_article_ibfk_3">
+      <columns>commenter</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>set_null</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="160" parent="26" name="trigger_comment_article_bi">
+      <trig-events>I</trig-events>
+      <trig-turn>BEFORE_ROW</trig-turn>
+    </trigger>
+    <trigger id="161" parent="26" name="trigger_comment_article_ai">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <trigger id="162" parent="26" name="trigger_comment_article_ad">
+      <trig-events>D</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="163" parent="27" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="164" parent="27" name="comment_to">
+      <comment>回复评论id</comment>
+      <data-type>int(255) unsigned|0</data-type>
+    </column>
+    <column id="165" parent="27" name="commenter">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="166" parent="27" name="content">
+      <comment>评论内容</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="167" parent="27" name="diary">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="168" parent="27" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="169" parent="27" name="status">
+      <comment>1表示删除，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="170" parent="27" name="comment_base">
+      <comment>评论的根评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <index id="171" parent="27" name="diary">
+      <columns>diary</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="172" parent="27" name="wj_comment_diary_ibfk_1">
+      <columns>comment_to</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="173" parent="27" name="wj_comment_diary_ibfk_2">
+      <columns>commenter</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="174" parent="27" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="175" parent="27" name="wj_comment_diary_ibfk_1">
+      <columns>comment_to</columns>
+      <ref-key>PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="176" parent="27" name="wj_comment_diary_ibfk_2">
+      <columns>commenter</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>set_null</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="177" parent="27" name="wj_comment_diary_ibfk_3">
+      <columns>diary</columns>
+      <ref-key>~.wj_diary.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="178" parent="27" name="trigger_comment_diary_bi">
+      <trig-events>I</trig-events>
+      <trig-turn>BEFORE_ROW</trig-turn>
+    </trigger>
+    <trigger id="179" parent="27" name="trigger_comment_diary_ai">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <trigger id="180" parent="27" name="trigger_comment_diary_ad">
+      <trig-events>D</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="181" parent="28" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="182" parent="28" name="name">
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="183" parent="28" name="value">
+      <data-type>varchar(31)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="184" parent="28" name="extra">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <key id="185" parent="28" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="186" parent="29" name="id">
+      <comment>日记表</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="187" parent="29" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="188" parent="29" name="title">
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="189" parent="29" name="content">
+      <comment>日记详情</comment>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="190" parent="29" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="191" parent="29" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="192" parent="29" name="status">
+      <comment>0为正常，1为隐藏</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="193" parent="29" name="follow_count">
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="194" parent="29" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="195" parent="29" name="top">
+      <comment>置顶为空</comment>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <index id="196" parent="29" name="author">
+      <columns>author</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="197" parent="29" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="198" parent="29" name="wj_diary_ibfk_1">
+      <columns>author</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="199" parent="30" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="200" parent="30" name="userId">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="201" parent="30" name="title">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="202" parent="30" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="203" parent="30" name="video">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="204" parent="30" name="type">
+      <comment>1话题2日记</comment>
+      <data-type>int(255)|0</data-type>
+    </column>
+    <column id="205" parent="30" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="206" parent="30" name="picture">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <key id="207" parent="30" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="208" parent="31" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="209" parent="31" name="content">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="210" parent="31" name="user">
+      <comment>发送反馈的人</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="211" parent="31" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="212" parent="31" name="reply">
+      <comment>反馈回复</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="213" parent="31" name="reply_time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="214" parent="31" name="status">
+      <comment>0为正常，1为以阅读，2为隐藏，3为已读后隐藏</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="215" parent="31" name="user">
+      <columns>user</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="216" parent="31" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="217" parent="31" name="wj_feedback_ibfk_1">
+      <columns>user</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="218" parent="31" name="trigger_feedback_bi">
+      <trig-events>I</trig-events>
+      <trig-turn>BEFORE_ROW</trig-turn>
+    </trigger>
+    <trigger id="219" parent="31" name="trigger_feedback_bu">
+      <trig-events>U</trig-events>
+      <trig-turn>BEFORE_ROW</trig-turn>
+    </trigger>
+    <column id="220" parent="32" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="221" parent="32" name="name">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="222" parent="32" name="pic">
+      <comment>商品图片</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="223" parent="32" name="need_score">
+      <comment>所需积分数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;99999999&apos;</default-expression>
+    </column>
+    <column id="224" parent="32" name="description">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="225" parent="32" name="time">
+      <comment>商品发布时间</comment>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="226" parent="32" name="status">
+      <comment>0为正常，1为删除</comment>
+      <data-type>tinyint(1)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="227" parent="32" name="number">
+      <comment>商品剩余数量</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="228" parent="32" name="exchange_count">
+      <comment>已兑换次数</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="229" parent="32" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="230" parent="33" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="231" parent="33" name="good_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="232" parent="33" name="time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp(6)|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP(6)</default-expression>
+    </column>
+    <column id="233" parent="33" name="handled">
+      <comment>0为未处理，1为已处理</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="234" parent="33" name="good_id">
+      <columns>good_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="235" parent="33" name="PRIMARY">
+      <columns>user_id
+good_id
+time</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="236" parent="33" name="wj_good_duihuan_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="237" parent="33" name="wj_good_duihuan_ibfk_2">
+      <columns>good_id</columns>
+      <ref-key>~.wj_good.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="238" parent="33" name="trigger_good_duihuan_ai">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="239" parent="34" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="240" parent="34" name="name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="241" parent="34" name="logo">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="242" parent="34" name="create_time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="243" parent="34" name="add_background">
+      <comment>是否后台添加</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="244" parent="34" name="show_foreground">
+      <data-type>bit(1)|0</data-type>
+    </column>
+    <index id="245" parent="34" name="name">
+      <columns>name</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="246" parent="34" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="247" parent="34" name="name">
+      <columns>name</columns>
+      <underlying-index>name</underlying-index>
+    </key>
+    <column id="248" parent="35" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="249" parent="35" name="title">
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="250" parent="35" name="content">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="251" parent="35" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="252" parent="35" name="status">
+      <comment>0为正常，1为不可见</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="253" parent="35" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="254" parent="36" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="255" parent="36" name="chat_type">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="256" parent="36" name="from">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="257" parent="36" name="to">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <column id="258" parent="36" name="content">
+      <mandatory>1</mandatory>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="259" parent="36" name="content_y">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="260" parent="36" name="time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="261" parent="36" name="msg_type">
+      <mandatory>1</mandatory>
+      <data-type>varchar(100)|0</data-type>
+    </column>
+    <key id="262" parent="36" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="263" parent="37" name="userid">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="264" parent="37" name="login_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="265" parent="37" name="logout_time">
+      <comment>登出时间</comment>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="266" parent="37" name="ip">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <key id="267" parent="37" name="PRIMARY">
+      <columns>userid
+login_time</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="268" parent="37" name="wj_log_user_login_ibfk_1">
+      <columns>userid</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="269" parent="37" name="trigger_login_count_ai">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="270" parent="38" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="271" parent="38" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="272" parent="38" name="article_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="273" parent="38" name="time">
+      <comment>浏览时间</comment>
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="274" parent="38" name="time_end">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="275" parent="38" name="source">
+      <comment>进入渠道，0为讨论区，1为提醒</comment>
+      <data-type>tinyint(4)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="276" parent="38" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="277" parent="39" name="diary_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="278" parent="39" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="279" parent="39" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="280" parent="39" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="281" parent="39" name="PRIMARY">
+      <columns>diary_id
+user_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="282" parent="39" name="wj_log_user_view_diary_ibfk_1">
+      <columns>diary_id</columns>
+      <ref-key>~.wj_diary.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="283" parent="39" name="wj_log_user_view_diary_ibfk_2">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="284" parent="40" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="285" parent="40" name="platform">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="286" parent="40" name="content">
+      <mandatory>1</mandatory>
+      <data-type>varchar(400)|0</data-type>
+    </column>
+    <column id="287" parent="40" name="create_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="288" parent="40" name="send_status">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="289" parent="40" name="img">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="290" parent="40" name="title">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="291" parent="40" name="url">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="292" parent="40" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="293" parent="41" name="nid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="294" parent="41" name="uname">
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <index id="295" parent="41" name="uname">
+      <columns>uname</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="296" parent="41" name="PRIMARY">
+      <columns>nid
+uname</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="297" parent="41" name="wj_notifys_user_ibfk_1">
+      <columns>nid</columns>
+      <ref-key>~.wj_notifys.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="298" parent="41" name="wj_notifys_user_ibfk_2">
+      <columns>uname</columns>
+      <ref-key>~.wj_user.unique_username</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="299" parent="42" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(8) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="300" parent="42" name="name">
+      <mandatory>1</mandatory>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <column id="301" parent="42" name="level">
+      <mandatory>1</mandatory>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="302" parent="42" name="upid">
+      <mandatory>1</mandatory>
+      <data-type>mediumint(8) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="303" parent="42" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="304" parent="43" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="305" parent="43" name="name">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="306" parent="43" name="value">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="307" parent="43" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="308" parent="44" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="309" parent="44" name="user_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="310" parent="44" name="event_id">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="311" parent="44" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="312" parent="44" name="score">
+      <comment>积分值</comment>
+      <data-type>int(10)|0</data-type>
+    </column>
+    <index id="313" parent="44" name="event_id">
+      <columns>event_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="314" parent="44" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="315" parent="44" name="user_id_2">
+      <columns>user_id
+event_id
+time</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <key id="316" parent="44" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="317" parent="44" name="user_id_2">
+      <columns>user_id
+event_id
+time</columns>
+      <underlying-index>user_id_2</underlying-index>
+    </key>
+    <foreign-key id="318" parent="44" name="wj_score_history_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="319" parent="44" name="wj_score_history_ibfk_2">
+      <columns>event_id</columns>
+      <ref-key>~.wj_score_config.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>set_null</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="320" parent="44" name="trigger_score_history_ai">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="321" parent="45" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="322" parent="45" name="token">
+      <data-type>char(31)|0</data-type>
+    </column>
+    <column id="323" parent="45" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <key id="324" parent="45" name="PRIMARY">
+      <columns>user_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="325" parent="45" name="wj_session_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="326" parent="45" name="trigger_session_after_delete">
+      <trig-events>D</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="327" parent="46" name="tableid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="328" parent="46" name="tabname">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <key id="329" parent="46" name="PRIMARY">
+      <columns>tableid</columns>
+      <primary>1</primary>
+    </key>
+    <column id="330" parent="47" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="331" parent="47" name="name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="332" parent="47" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="333" parent="47" name="avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="334" parent="47" name="sex">
+      <comment>0为男，1为女</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+    </column>
+    <column id="335" parent="47" name="birthday">
+      <comment>出生日期</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="336" parent="47" name="email">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="337" parent="47" name="degree">
+      <comment>学历</comment>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="338" parent="47" name="role">
+      <comment>1用户，2管理员3两边都是</comment>
+      <data-type>tinyint(2) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="339" parent="47" name="marriage">
+      <comment>婚姻状况</comment>
+      <data-type>varchar(7)|0</data-type>
+    </column>
+    <column id="340" parent="47" name="nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="341" parent="47" name="graduated_from">
+      <comment>毕业学校</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="342" parent="47" name="personalized_signature">
+      <comment>个性签名</comment>
+      <data-type>varchar(511)|0</data-type>
+    </column>
+    <column id="343" parent="47" name="major">
+      <comment>专业</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="344" parent="47" name="location">
+      <comment>现居地</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="345" parent="47" name="interest">
+      <comment>兴趣，英文逗号分割</comment>
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="346" parent="47" name="score">
+      <comment>积分</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="347" parent="47" name="realname">
+      <comment>手机号</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="348" parent="47" name="subscribe">
+      <comment>0为未，1为已订阅新商品提醒</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="349" parent="47" name="allow_article">
+      <comment>是否允许发布话题，0为不允许，1为允许</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="350" parent="47" name="query_last_diary_comment">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="351" parent="47" name="query_last_article_comment">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="352" parent="47" name="query_last_diary_like">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="353" parent="47" name="query_last_feedback">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="354" parent="47" name="query_last_article_id">
+      <data-type>int(255)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="355" parent="47" name="query_last_diary_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="356" parent="47" name="query_last_push_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="357" parent="47" name="login_count">
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="358" parent="47" name="register_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="359" parent="47" name="questionnaire_time">
+      <comment>回答问卷次数</comment>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="360" parent="47" name="add_background">
+      <comment>是否为后台添加</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="361" parent="47" name="extra">
+      <comment>额外字段</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <index id="362" parent="47" name="unique_username">
+      <columns>name</columns>
+      <desc-columns></desc-columns>
+      <unique>1</unique>
+    </index>
+    <index id="363" parent="47" name="wj_user_ibfk_1">
+      <columns>location</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="364" parent="47" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <key id="365" parent="47" name="unique_username">
+      <columns>name</columns>
+      <underlying-index>unique_username</underlying-index>
+    </key>
+    <column id="366" parent="48" name="userid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="367" parent="48" name="articleid">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="368" parent="48" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="369" parent="48" name="articleid">
+      <columns>articleid</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="370" parent="48" name="PRIMARY">
+      <columns>userid
+articleid</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="371" parent="48" name="wj_user_follow_article_ibfk_1">
+      <columns>userid</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="372" parent="48" name="wj_user_follow_article_ibfk_2">
+      <columns>articleid</columns>
+      <ref-key>~.wj_article.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="373" parent="48" name="userfollowarticle_afterinsert">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <trigger id="374" parent="48" name="userfollowarticle_afterdelete">
+      <trig-events>D</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="375" parent="49" name="userid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="376" parent="49" name="diaryid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="377" parent="49" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="378" parent="49" name="diaryid">
+      <columns>diaryid</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="379" parent="49" name="PRIMARY">
+      <columns>userid
+diaryid</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="380" parent="49" name="wj_user_follow_diary_ibfk_1">
+      <columns>userid</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="381" parent="49" name="wj_user_follow_diary_ibfk_2">
+      <columns>diaryid</columns>
+      <ref-key>~.wj_diary.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <trigger id="382" parent="49" name="userfollowdiary_afterinsert">
+      <trig-events>I</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <trigger id="383" parent="49" name="userfollowdiary_afterdelete">
+      <trig-events>D</trig-events>
+      <trig-turn>AFTER_ROW</trig-turn>
+    </trigger>
+    <column id="384" parent="50" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="385" parent="50" name="group_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="386" parent="50" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <column id="387" parent="50" name="last_query_article_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="388" parent="50" name="group_id">
+      <columns>group_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="389" parent="50" name="PRIMARY">
+      <columns>user_id
+group_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="390" parent="50" name="wj_user_group_ibfk_1">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="391" parent="50" name="wj_user_group_ibfk_2">
+      <columns>group_id</columns>
+      <ref-key>~.wj_group.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="392" parent="51" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="393" parent="51" name="tel">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="394" parent="51" name="code">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="395" parent="51" name="usage">
+      <comment>用途，0为注册用</comment>
+      <mandatory>1</mandatory>
+      <data-type>tinyint(3) unsigned|0</data-type>
+    </column>
+    <column id="396" parent="51" name="time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="397" parent="51" name="user_id">
+      <columns>tel</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="398" parent="51" name="PRIMARY">
+      <columns>id</columns>
+      <primary>1</primary>
+    </key>
+    <column id="399" parent="52" name="id">
+      <data-type>bigint(20)|0</data-type>
+    </column>
+    <column id="400" parent="52" name="openId">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="401" parent="52" name="nickname">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="402" parent="52" name="city">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="403" parent="52" name="province">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="404" parent="52" name="country">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="405" parent="52" name="privilege">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="406" parent="52" name="userid">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="407" parent="52" name="sex">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="408" parent="52" name="headimgurl">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="409" parent="52" name="unionid">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="410" parent="52" name="refresh_token">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="411" parent="52" name="access_token">
+      <data-type>longtext|0</data-type>
+    </column>
+    <column id="412" parent="52" name="last_refresh_time">
+      <data-type>date|0</data-type>
+    </column>
+    <column id="413" parent="53" name="article_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="414" parent="53" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="415" parent="53" name="time">
+      <data-type>timestamp|0</data-type>
+      <default-expression>CURRENT_TIMESTAMP</default-expression>
+    </column>
+    <index id="416" parent="53" name="user_id">
+      <columns>user_id</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="417" parent="53" name="PRIMARY">
+      <columns>article_id
+user_id</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="418" parent="53" name="wj_user_like_article_ibfk_1">
+      <columns>article_id</columns>
+      <ref-key>~.wj_article.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="419" parent="53" name="wj_user_like_article_ibfk_2">
+      <columns>user_id</columns>
+      <ref-key>~.wj_user.PRIMARY</ref-key>
+      <cascade-update-rule>update</cascade-update-rule>
+      <cascade-delete-rule>delete</cascade-delete-rule>
+    </foreign-key>
+    <column id="420" parent="54" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="421" parent="54" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="422" parent="54" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="423" parent="54" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="424" parent="54" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="425" parent="54" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="426" parent="54" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="427" parent="54" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="428" parent="54" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="429" parent="54" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="430" parent="54" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="431" parent="54" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="432" parent="54" name="author_name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="433" parent="54" name="author_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="434" parent="54" name="author_avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="435" parent="54" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="436" parent="55" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="437" parent="55" name="commenter_name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="438" parent="55" name="commenter_avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="439" parent="55" name="article">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="440" parent="55" name="comment_to_id">
+      <comment>回复的评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="441" parent="55" name="content">
+      <comment>评论内容(文字)</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="442" parent="55" name="pics">
+      <comment>图片路径，以冒号为分隔符</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="443" parent="55" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="444" parent="55" name="status">
+      <comment>1表示删除该评论，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="445" parent="55" name="commenter_role">
+      <comment>1用户，2管理员3两边都是</comment>
+      <data-type>tinyint(2) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="446" parent="55" name="comment_to_user_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="447" parent="55" name="comment_to_name">
+      <comment>手机号即用户名</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="448" parent="55" name="commenter">
+      <comment>评论用户</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="449" parent="55" name="comment_base">
+      <comment>评论的根评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="450" parent="55" name="commenter_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="451" parent="55" name="comment_to_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="452" parent="56" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="453" parent="56" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="454" parent="56" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="455" parent="56" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="456" parent="56" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="457" parent="56" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="458" parent="56" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="459" parent="56" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="460" parent="56" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="461" parent="56" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="462" parent="56" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="463" parent="56" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="464" parent="56" name="author_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="465" parent="56" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="466" parent="57" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="467" parent="57" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="468" parent="57" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="469" parent="57" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="470" parent="57" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="471" parent="57" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="472" parent="57" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="473" parent="57" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="474" parent="57" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="475" parent="57" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="476" parent="57" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="477" parent="57" name="username">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="478" parent="57" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="479" parent="57" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="480" parent="57" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="481" parent="58" name="valueid">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="482" parent="58" name="uid">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="483" parent="58" name="cid">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="484" parent="58" name="cvalue">
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;&apos;</default-expression>
+    </column>
+    <column id="485" parent="58" name="column_name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="486" parent="58" name="tableid">
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="487" parent="58" name="column_type">
+      <comment>0为整形，1为字符串</comment>
+      <data-type>tinyint(4)|0</data-type>
+    </column>
+    <column id="488" parent="59" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="489" parent="59" name="commenter_id">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="490" parent="59" name="commenter_name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="491" parent="59" name="commenter_avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="492" parent="59" name="diary">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="493" parent="59" name="comment_to_id">
+      <comment>回复评论id</comment>
+      <data-type>int(255) unsigned|0</data-type>
+    </column>
+    <column id="494" parent="59" name="content">
+      <comment>评论内容</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="495" parent="59" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="496" parent="59" name="status">
+      <comment>1表示删除，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="497" parent="59" name="comment_base">
+      <comment>评论的根评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="498" parent="59" name="commenter_role">
+      <comment>1用户，2管理员3两边都是</comment>
+      <data-type>tinyint(2) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="499" parent="59" name="comment_to_name">
+      <comment>手机号即用户名</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="500" parent="59" name="commenter_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="501" parent="59" name="comment_to_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="502" parent="59" name="comment_to_user_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="503" parent="60" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="504" parent="60" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="505" parent="60" name="name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="506" parent="60" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="507" parent="60" name="avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="508" parent="60" name="sex">
+      <comment>0为男，1为女</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+    </column>
+    <column id="509" parent="60" name="birthday">
+      <comment>出生日期</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="510" parent="60" name="email">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="511" parent="60" name="degree">
+      <comment>学历</comment>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="512" parent="60" name="role">
+      <comment>1用户，2管理员3两边都是</comment>
+      <data-type>tinyint(2) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="513" parent="60" name="marriage">
+      <comment>婚姻状况</comment>
+      <data-type>varchar(7)|0</data-type>
+    </column>
+    <column id="514" parent="60" name="nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="515" parent="60" name="graduated_from">
+      <comment>毕业学校</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="516" parent="60" name="personalized_signature">
+      <comment>个性签名</comment>
+      <data-type>varchar(511)|0</data-type>
+    </column>
+    <column id="517" parent="60" name="major">
+      <comment>专业</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="518" parent="60" name="location">
+      <comment>现居地</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="519" parent="60" name="interest">
+      <comment>兴趣，英文逗号分割</comment>
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="520" parent="60" name="score">
+      <comment>积分</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="521" parent="60" name="realname">
+      <comment>手机号</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="522" parent="60" name="subscribe">
+      <comment>0为未，1为已订阅新商品提醒</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="523" parent="60" name="allow_article">
+      <comment>是否允许发布话题，0为不允许，1为允许</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="524" parent="60" name="query_last_diary_comment">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="525" parent="60" name="query_last_article_comment">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="526" parent="60" name="query_last_diary_like">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="527" parent="60" name="query_last_feedback">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="528" parent="60" name="login_count">
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="529" parent="60" name="register_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <column id="530" parent="60" name="extra">
+      <comment>额外字段</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="531" parent="60" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="532" parent="60" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="533" parent="60" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="534" parent="60" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="535" parent="60" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="536" parent="60" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="537" parent="60" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="538" parent="60" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="539" parent="60" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="540" parent="60" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="541" parent="60" name="favor_time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="542" parent="60" name="query_last_article_id">
+      <data-type>int(255)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="543" parent="60" name="query_last_diary_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="544" parent="60" name="questionnaire_time">
+      <comment>回答问卷次数</comment>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="545" parent="61" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="546" parent="61" name="time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp(6)|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00.000000&apos;</default-expression>
+    </column>
+    <column id="547" parent="61" name="handled">
+      <comment>0为未处理，1为已处理</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="548" parent="61" name="name">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="549" parent="61" name="pic">
+      <comment>商品图片</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="550" parent="61" name="need_score">
+      <comment>所需积分数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;99999999&apos;</default-expression>
+    </column>
+    <column id="551" parent="61" name="good_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="552" parent="61" name="description">
+      <data-type>text|0</data-type>
+    </column>
+    <column id="553" parent="62" name="notify_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="554" parent="62" name="user_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="555" parent="62" name="name">
+      <comment>手机号即用户名</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="556" parent="62" name="avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="557" parent="62" name="nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="558" parent="62" name="realname">
+      <comment>手机号</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="559" parent="62" name="platform">
+      <mandatory>1</mandatory>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="560" parent="62" name="content">
+      <mandatory>1</mandatory>
+      <data-type>varchar(400)|0</data-type>
+    </column>
+    <column id="561" parent="62" name="create_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <column id="562" parent="62" name="send_status">
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="563" parent="62" name="img">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="564" parent="62" name="title">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="565" parent="62" name="url">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="566" parent="62" name="article_title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="567" parent="62" name="article_pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="568" parent="63" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="569" parent="63" name="user_id">
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="570" parent="63" name="event_id">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="571" parent="63" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="572" parent="63" name="score">
+      <comment>积分值</comment>
+      <data-type>int(10)|0</data-type>
+    </column>
+    <column id="573" parent="63" name="event_name">
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="574" parent="63" name="event_value">
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="575" parent="64" name="group_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="576" parent="64" name="group_name">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="577" parent="64" name="group_logo">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="578" parent="64" name="name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="579" parent="64" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="580" parent="64" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="581" parent="64" name="password">
+      <mandatory>1</mandatory>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="582" parent="64" name="avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="583" parent="64" name="sex">
+      <comment>0为男，1为女</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+    </column>
+    <column id="584" parent="64" name="birthday">
+      <comment>出生日期</comment>
+      <data-type>datetime|0</data-type>
+    </column>
+    <column id="585" parent="64" name="email">
+      <data-type>varchar(255)|0</data-type>
+    </column>
+    <column id="586" parent="64" name="degree">
+      <comment>学历</comment>
+      <data-type>varchar(15)|0</data-type>
+    </column>
+    <column id="587" parent="64" name="role">
+      <comment>1用户，2管理员3两边都是</comment>
+      <data-type>tinyint(2) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="588" parent="64" name="marriage">
+      <comment>婚姻状况</comment>
+      <data-type>varchar(7)|0</data-type>
+    </column>
+    <column id="589" parent="64" name="nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="590" parent="64" name="graduated_from">
+      <comment>毕业学校</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="591" parent="64" name="personalized_signature">
+      <comment>个性签名</comment>
+      <data-type>varchar(511)|0</data-type>
+    </column>
+    <column id="592" parent="64" name="major">
+      <comment>专业</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="593" parent="64" name="location">
+      <comment>现居地</comment>
+      <data-type>varchar(63)|0</data-type>
+    </column>
+    <column id="594" parent="64" name="interest">
+      <comment>兴趣，英文逗号分割</comment>
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="595" parent="64" name="score">
+      <comment>积分</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="596" parent="64" name="realname">
+      <comment>手机号</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="597" parent="64" name="subscribe">
+      <comment>0为未，1为已订阅新商品提醒</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="598" parent="64" name="allow_article">
+      <comment>是否允许发布话题，0为不允许，1为允许</comment>
+      <data-type>tinyint(3) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="599" parent="64" name="query_last_diary_comment">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="600" parent="64" name="query_last_diary_like">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="601" parent="64" name="query_last_article_comment">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="602" parent="64" name="query_last_feedback">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="603" parent="64" name="login_count">
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="604" parent="64" name="register_time">
+      <mandatory>1</mandatory>
+      <data-type>timestamp|0</data-type>
+      <default-expression>&apos;0000-00-00 00:00:00&apos;</default-expression>
+    </column>
+    <column id="605" parent="64" name="extra">
+      <comment>额外字段</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="606" parent="64" name="questionnaire_time">
+      <comment>回答问卷次数</comment>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="607" parent="64" name="query_last_article_id">
+      <data-type>int(255)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="608" parent="64" name="query_last_diary_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="609" parent="64" name="query_last_push_id">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="610" parent="65" name="userid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="611" parent="65" name="follow_time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="612" parent="65" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="613" parent="65" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="614" parent="65" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="615" parent="65" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="616" parent="65" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="617" parent="65" name="article_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="618" parent="65" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="619" parent="65" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="620" parent="65" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="621" parent="65" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="622" parent="65" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="623" parent="65" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="624" parent="66" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="625" parent="66" name="content">
+      <comment>日记详情</comment>
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="626" parent="66" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="627" parent="66" name="status">
+      <comment>0为正常，1为隐藏</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="628" parent="66" name="follow_count">
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="629" parent="66" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="630" parent="66" name="user_name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="631" parent="66" name="user_avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="632" parent="66" name="user_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="633" parent="66" name="author_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="634" parent="66" name="author_name">
+      <comment>手机号即用户名</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="635" parent="66" name="author_nickname">
+      <comment>昵称</comment>
+      <data-type>varchar(31)|0</data-type>
+    </column>
+    <column id="636" parent="66" name="author_avatar">
+      <comment>头像</comment>
+      <data-type>varchar(255)|0</data-type>
+      <default-expression>&apos;/avatar/defaultUserHead.png&apos;</default-expression>
+    </column>
+    <column id="637" parent="66" name="user_id">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="638" parent="66" name="diary_id">
+      <comment>日记表</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="639" parent="66" name="top">
+      <comment>置顶为空</comment>
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="640" parent="67" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="641" parent="67" name="comment_to">
+      <comment>回复的评论id</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="642" parent="67" name="article">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="643" parent="67" name="commenter">
+      <comment>评论用户</comment>
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="644" parent="67" name="content">
+      <comment>评论内容(文字)</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="645" parent="67" name="pics">
+      <comment>图片路径，以冒号为分隔符</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="646" parent="67" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="647" parent="67" name="status">
+      <comment>1表示删除该评论，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="648" parent="67" name="author">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="649" parent="68" name="id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="650" parent="68" name="comment_to">
+      <comment>回复评论id</comment>
+      <data-type>int(255) unsigned|0</data-type>
+    </column>
+    <column id="651" parent="68" name="commenter">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="652" parent="68" name="content">
+      <comment>评论内容</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="653" parent="68" name="diary">
+      <comment>评论的文章id</comment>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="654" parent="68" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="655" parent="68" name="status">
+      <comment>1表示删除，0表示正常</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="656" parent="68" name="author">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="657" parent="69" name="userid">
+      <mandatory>1</mandatory>
+      <data-type>int(10) unsigned|0</data-type>
+    </column>
+    <column id="658" parent="69" name="follow_time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="659" parent="69" name="author">
+      <data-type>int(11) unsigned|0</data-type>
+    </column>
+    <column id="660" parent="69" name="title">
+      <data-type>varchar(127)|0</data-type>
+    </column>
+    <column id="661" parent="69" name="content">
+      <data-type>mediumtext|0</data-type>
+    </column>
+    <column id="662" parent="69" name="status">
+      <comment>状态，0为正常，1为已删除</comment>
+      <data-type>tinyint(4) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="663" parent="69" name="follow_count">
+      <data-type>int(10) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="664" parent="69" name="article_id">
+      <mandatory>1</mandatory>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="665" parent="69" name="avai">
+      <comment>是否默认全部可见,0为不可见，1为默认可见</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="666" parent="69" name="top">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="667" parent="69" name="time">
+      <data-type>timestamp|0</data-type>
+    </column>
+    <column id="668" parent="69" name="reply_count">
+      <comment>回复数</comment>
+      <data-type>int(11) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <column id="669" parent="69" name="pics">
+      <comment>图片和视频，采用的格式是：v:视频连接;i:图片连接1,图片连接2,图片连接3,若视频为空，则为 v:;i:img1.jpg,img2.jpg</comment>
+      <data-type>text|0</data-type>
+    </column>
+    <column id="670" parent="69" name="publish_background">
+      <comment>是否为后台发布</comment>
+      <data-type>tinyint(1) unsigned|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <argument id="671" parent="70">
+      <direction>RETURN</direction>
+      <data-type>varchar(31)|0</data-type>
+    </argument>
+    <argument id="672" parent="70" name="locationCode">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="673" parent="71">
+      <direction>RETURN</direction>
+      <data-type>tinyint(1)|0</data-type>
+    </argument>
+    <argument id="674" parent="71" name="user_id">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="675" parent="71" name="article_id">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="676" parent="72">
+      <direction>RETURN</direction>
+      <data-type>tinyint(1)|0</data-type>
+    </argument>
+    <argument id="677" parent="72" name="user_id">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="678" parent="72" name="diary_id">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="679" parent="73">
+      <direction>RETURN</direction>
+      <data-type>tinyint(1)|0</data-type>
+    </argument>
+    <argument id="680" parent="73" name="user">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="681" parent="73" name="article">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="682" parent="74">
+      <direction>RETURN</direction>
+      <data-type>tinyint(1)|0</data-type>
+    </argument>
+    <argument id="683" parent="74" name="user">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="684" parent="74" name="diary">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="685" parent="75">
+      <direction>RETURN</direction>
+      <data-type>tinyint(1)|0</data-type>
+    </argument>
+    <argument id="686" parent="75" name="userId">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+    <argument id="687" parent="75" name="articleid">
+      <direction>IN</direction>
+      <data-type>int(10) unsigned|0</data-type>
+    </argument>
+  </database-model>
+</dataSource>

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserViewArticleLogMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserViewArticleLog">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="article_id" property="articleId" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+        <result column="time_end" property="timeEnd" jdbcType="TIMESTAMP"/>
+        <result column="source" property="source" jdbcType="TINYINT"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM wj_log_user_view_article
+        WHERE id = #{id}
+    </select>
+    <select id="selectTimeEndNullByArticleUser" parameterType="map" resultMap="BaseResultMap">
+        SELECT *
+        FROM wj_log_user_view_article
+        WHERE article_id = #{aid} AND user_id = #{uid} AND time_end IS NULL
+        LIMIT  1
+        ;
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        DELETE FROM wj_log_user_view_article
+        WHERE id = #{id}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.UserViewArticleLog">
+        <selectKey resultType="java.lang.Integer" keyProperty="id">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into wj_log_user_view_article
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="articleId != null">
+                article_id,
+            </if>
+            <if test="time != null">
+                `time`,
+            </if>
+            <if test="timeEnd != null">
+                time_end,
+            </if>
+            <if test="source != null">
+                `source`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="articleId != null">
+                #{articleId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeEnd != null">
+                #{timeEnd,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                #{source,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.UserViewArticleLog">
+        update wj_log_user_view_article
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="articleId != null">
+                article_id = #{articleId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                time = #{time,jdbcType=TIMESTAMP},
+            </if>
+            <if test="timeEnd != null">
+                time_end = #{timeEnd,jdbcType=TIMESTAMP},
+            </if>
+            <if test="source != null">
+                source = #{source,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="setUnreadMessageRead" parameterType="com.wenjuan.model.UserViewArticleLog">
+        UPDATE wj_log_user_view_article
+        SET time_end = CURRENT_TIMESTAMP
+        WHERE time_end IS NULL
+              AND id = #{id,jdbcType=INTEGER}
+    </update>
+    <!-- 浏览次数 -->
+    <select id="ViewCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_log_user_view_article
+        WHERE user_id = #{id}
+    </select>
+    <!-- 查询本月浏览次数 -->
+    <select id="getViewCount" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_log_user_view_article
+        WHERE user_id = #{id} AND date_format(time, '%Y-%m') = date_format(now(), '%Y-%m')
+
+    </select>
+    <!-- 查询上月月浏览次数 -->
+    <select id="getViewCount2" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_log_user_view_article
+        WHERE user_id = #{id} AND PERIOD_DIFF(date_format(now(), '%Y%m'), date_format(time, '%Y%m')) = 1
+
+
+    </select>
+    <select id="getViewData" resultType="com.wenjuan.model.UserViewArticleLog" parameterType="map">
+        SELECT v.*
+        FROM wj_log_user_view_article v, wj_comment_article c
+        WHERE v.user_id = c.commenter AND v.article_id = c.article
+              AND v.time &lt;= c.time AND v.time_end &gt;= c.time
+        ORDER BY (SELECT time
+                  FROM wj_article
+                  WHERE id = v.article_id) DESC
+        LIMIT #{begin}, #{end}
+    </select>
+    <select id="getViewDataCount" resultType="int">
+        SELECT count(*)
+        FROM wj_log_user_view_article v, wj_comment_article c
+        WHERE v.user_id = c.commenter AND v.article_id = c.article
+              AND v.time &lt;= c.time AND v.time_end &gt;= c.time
+
+    </select>
+    <select id="GetViewTime" resultType="int" parameterType="java.lang.String">
+        SELECT IFNULL(sum((UNIX_TIMESTAMP(time_end) - UNIX_TIMESTAMP(time))), 0)
+        FROM wj_log_user_view_article
+        WHERE
+            id = #{id}
+        GROUP BY user_id, article_id;
+    </select>
+    <select id="ViewBeginEnd" resultType="com.wenjuan.model.UserViewArticleLog">
+        SELECT *
+        FROM wj_log_user_view_article
+        WHERE user_id = #{uid}
+        ORDER BY time DESC
+    </select>
+    <select id="ViewMM" resultType="int" parameterType="int">
+        SELECT count(*)
+        FROM wj_log_user_view_article
+        WHERE date_sub(curdate(), INTERVAL 30 DAY) &gt;= date(time) AND
+              user_id = #{uid};
+    </select>
+    <select id="VBE" resultType="com.wenjuan.model.UserViewArticleLog" parameterType="java.util.Map">
+      SELECT *
+        FROM wj_log_user_view_article
+        WHERE user_id =#{uid} AND article_id = #{aid} AND
+			time &lt;= #{ACtime}  and time_end &gt;=#{ACtime}
+        limit 1
+    </select>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserViewDiaryLogMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserViewDiaryLog">
+        <id column="diary_id" property="diaryId" jdbcType="INTEGER"/>
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map">
+        select *
+        from wj_log_user_view_diary
+        where diary_id = #{diaryId,jdbcType=INTEGER}
+        and user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from wj_log_user_view_diary
+        where diary_id = #{diaryId,jdbcType=INTEGER}
+        and user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.UserViewDiaryLog">
+        insert IGNORE into wj_log_user_view_diary
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="diaryId != null">
+                diary_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="diaryId != null">
+                #{diaryId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!-- 浏览次数 -->
+    <select id="ViewCount" resultType="int" parameterType="int">
+        select count(*) from wj_log_user_view_diary where user_id=#{id}
+    </select>
+    <!-- 本月 -->
+    <select id="getViewCount" resultType="int" parameterType="int">
+        select count(*) from wj_log_user_view_diary where user_id=#{id} and
+        date_format(time,'%Y-%m')=date_format(now(),'%Y-%m')
+
+    </select>
+    <!-- 上月 -->
+    <select id="getViewCount2" resultType="int" parameterType="int">
+        Select count(*) FROM wj_log_user_view_diary Where user_id=#{id} and PERIOD_DIFF( date_format( now( ) , '%Y%m' )
+        , date_format( time, '%Y%m' ) ) =1
+
+    </select>
+</mapper>

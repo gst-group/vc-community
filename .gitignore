@@ -1,0 +1,5 @@
+#target排除
+/target
+
+# class文件排除在外
+*.class

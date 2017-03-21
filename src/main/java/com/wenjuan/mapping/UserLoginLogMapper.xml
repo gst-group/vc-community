@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserLoginLogMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserLoginLog">
+        <id column="userid" property="userid" jdbcType="INTEGER"/>
+        <id column="login_time" property="loginTime" jdbcType="TIMESTAMP"/>
+        <id column="logout_time" property="logoutTime" jdbcType="TIMESTAMP"/>
+        <result column="ip" property="ip" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectLastLoginLog" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select *
+        from wj_log_user_login
+        where userid = #{userid,jdbcType=INTEGER}
+        and login_time IS NULL
+        ORDER BY login_time DESC
+        LIMIT 1
+    </select>
+    <insert id="insert" parameterType="com.wenjuan.model.UserLoginLog">
+        insert IGNORE into wj_log_user_login
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="loginTime != null">
+                login_time,
+            </if>
+            <if test="logoutTime != null">
+                logout_time,
+            </if>
+            <if test="ip != null">
+                ip,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="loginTime != null">
+                #{loginTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="logoutTime != null">
+                #{logoutTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ip != null">
+                #{ip,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.UserLoginLog">
+        UPDATE wj_log_user_login SET logout_time = #{logoutTime,jdbcType=TIMESTAMP} where userid =
+        #{userid,jdbcType=INTEGER} AND login_time = #{loginTime,jdbcType=TIMESTAMP}
+    </update>
+    <!-- 查询登录次数 -->
+    <select id="selectCountLogin" parameterType="int" resultType="int">
+        select count(*) from wj_log_user_login where userid=#{id}
+    </select>
+    <!-- 查询本月登录次数 -->
+    <select id="getLoginCount" parameterType="int" resultType="int">
+        select count(*) from wj_log_user_login where userid=#{id} and
+        date_format(login_time,'%Y-%m')=date_format(now(),'%Y-%m')
+    </select>
+    <!-- 查询上上月登录次数 -->
+    <select id="getLoginCount2" parameterType="int" resultType="int">
+        Select count(*) FROM wj_log_user_login Where userid=#{id} and PERIOD_DIFF( date_format( now( ) , '%Y%m' ) ,
+        date_format( login_time, '%Y%m' ) ) =1
+    </select>
+    <select id="UserLoginInfo" parameterType="int" resultType="com.wenjuan.model.UserLoginLog">
+        select * from wj_log_user_login where date_sub(curdate(), INTERVAL 30 DAY) &lt;= date(login_time) and
+        userid=#{uid} order by login_time desc
+    </select>
+</mapper>

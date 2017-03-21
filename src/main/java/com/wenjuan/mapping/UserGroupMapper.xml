@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.UserGroupMapper">
+    <resultMap id="BaseResultMap" type="com.wenjuan.model.UserGroup">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <id column="group_id" property="groupId" jdbcType="INTEGER"/>
+        <id column="last_query_article_id" property="lastQueryArticleId" jdbcType="INTEGER"/>
+        <id column="time" property="time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        SELECT *
+        FROM wj_user_group
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+              AND group_id = #{groupId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        DELETE FROM wj_user_group
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+              AND group_id = #{groupId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.wenjuan.model.UserGroup">
+        replace INTO wj_user_group (user_id, group_id)
+            VALUE (#{userId,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER})
+    </insert>
+    <delete id="deleteUserGroup" parameterType="java.lang.Integer">
+        DELETE FROM wj_user_group
+        WHERE user_id = #{userId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insertUsersIntoGroup" parameterType="com.wenjuan.model.UserGroup">
+        replace  INTO wj_user_group (user_id, group_id) VALUE
+        <foreach collection="ids" index="index" item="id" separator=",">
+            (#{id,jdbcType=INTEGER}, #{groupId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.wenjuan.model.UserGroup">
+        UPDATE wj_user_group
+        <set>
+            <if test="lastQueryArticleId != null">
+                last_query_article_id = #{lastQueryArticleId}
+            </if>
+        </set>
+        where user_id = #{userId,jdbcType=INTEGER}
+        AND group_id = #{groupId,jdbcType=INTEGER}
+    </update>
+    <select id="selectArticleGroupMsgCount" parameterType="int" resultType="java.util.HashMap">
+        SELECT
+            wug.group_id,
+            count(*) count
+        FROM wj_user_group wug, wj_article wa
+        WHERE wug.group_id = wa.group_id AND wa.id > wug.last_query_article_id
+              AND wug.user_id = #{userId}
+        GROUP BY wug.user_id, wug.group_id
+    </select>
+    <delete id="del" parameterType="int">
+        DELETE FROM wj_user_group
+        WHERE group_id = #{gid}
+    </delete>
+    <update id="updateUserReadArticleIdIfGreater" parameterType="com.wenjuan.model.UserGroup">
+        UPDATE wj_user_group
+        SET last_query_article_id = #{lastQueryArticleId}
+        WHERE last_query_article_id &lt; #{lastQueryArticleId}
+              AND user_id = #{userId}
+              AND group_id = #{groupId}
+    </update>
+    <update id="addUserToAllGroup" parameterType="java.util.Map">
+        replace INTO wj_user_group (user_id, group_id)
+            SELECT * from (
+                              SELECT
+                                  #{userId},
+                                  id
+                              FROM wj_group
+                              WHERE add_background = 0
+                              or add_background=1)  temp
+            where						 EXISTS
+            (
+                    SELECT
+                        id
+                    FROM
+                        wj_group
+                    WHERE
+                        ogid =#{ogid}
+                        AND temp.id = wj_group.id
+            )
+
+
+
+    </update>
+</mapper>

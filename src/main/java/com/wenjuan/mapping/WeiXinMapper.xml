@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wenjuan.dao.WeiXinMapper" >
+  <resultMap id="BaseResultMap" type="com.wenjuan.model.WeiXin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="openId" property="openId" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="privilege" property="privilege" jdbcType="VARCHAR" />
+    <result column="userid" property="userid" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="headimgurl" property="headImgURL" jdbcType="VARCHAR"/>
+    <result column="unionid" property="unionId" jdbcType="VARCHAR"/>
+    <result column="refresh_token" property="refreshToken" jdbcType="VARCHAR"/>
+    <result column="access_token" property="accessToken" jdbcType="VARCHAR"/>
+    <result column="last_refresh_time" property="lastRefreshTime" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+  </resultMap>
+  <insert id="insert" parameterType="com.wenjuan.model.WeiXin">
+  	<selectKey resultType="java.lang.Integer" keyProperty="id">
+        SELECT LAST_INSERT_ID()
+    </selectKey>
+	INSERT into
+	wj_weixin
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+        openId,
+        <if test="nickname != null">
+            nickname,
+        </if>
+        <if test="city != null">
+            city,
+        </if>
+        <if test="province != null">
+            province,
+        </if>
+        <if test="country != null">
+            country,
+        </if>
+        <if test="privilege != null">
+            privilege,
+        </if>
+        <if test="userid != null">
+            userid,
+        </if>
+        <if test="sex != null">
+            sex,
+        </if>
+        <if test="headImgURL != null">
+            headimgurl,
+        </if>
+        <if test="unionId != null">
+            unionid,
+        </if>
+        <if test="refreshToken != null">
+            refresh_token,
+        </if>
+        <if test="accessToken != null">
+            access_token,
+        </if>
+        <if test="lastRefreshTime != null">
+            last_refresh_time,
+        </if>
+    </trim>
+	<trim prefix="values (" suffix=")" suffixOverrides=",">
+		#{openId,jdbcType=VARCHAR},
+		<if test="nickname != null">
+			#{nickname,jdbcType=VARCHAR},
+		</if>
+		<if test="city != null">
+			#{city,jdbcType=VARCHAR},
+		</if>
+		<if test="province != null">
+			#{province,jdbcType=VARCHAR},
+		</if>
+		<if test="country != null">
+			#{country,jdbcType=VARCHAR},
+		</if>
+		<if test="privilege != null">
+			#{privilege,jdbcType=VARCHAR},
+		</if>
+		<if test="userid != null">
+			#{userid,jdbcType=VARCHAR},
+		</if>
+		<if test="sex != null">
+			#{sex,jdbcType=VARCHAR},
+		</if>
+		<if test="headImgURL != null">
+			#{headImgURL,jdbcType=VARCHAR},
+		</if>
+		<if test="unionId != null">
+			#{unionId,jdbcType=VARCHAR},
+		</if>
+		<if test="refreshToken != null">
+			#{refreshToken,jdbcType=VARCHAR},
+		</if>
+		<if test="accessToken != null">
+			#{accessToken,jdbcType=VARCHAR},
+		</if>
+		<if test="lastRefreshTime != null">
+			#{lastRefreshTime,jdbcType=TIMESTAMP},
+		</if>
+	</trim>
+  </insert>
+  
+  <update id="update" parameterType="com.wenjuan.model.WeiXin">
+	update wj_weixin
+	<set>
+		<if test="nickname != null">
+			nickname = #{nickname},
+		</if>
+		<if test="city != null">
+			city = #{city},
+		</if>
+		<if test="province != null">
+			province = #{province},
+		</if>
+		<if test="country != null">
+			country = #{country},
+		</if>
+		<if test="privilege != null">
+			privilege = #{privilege},
+		</if>
+		<if test="userid != null">
+			userid = #{userid},
+		</if>
+		<if test="sex != null">
+			sex = #{sex},
+		</if>
+		<if test="headImgURL != null">
+			headimgurl = #{headImgURL},
+		</if>
+		<if test="unionId != null">
+			unionid = #{unionId},
+		</if>
+		<if test="refreshToken != null">
+			refresh_token = #{refreshToken},
+		</if>
+		<if test="accessToken != null">
+			access_token = #{accessToken},
+		</if>
+		<if test="lastRefreshTime != null">
+			last_refresh_time = #{lastRefreshTime,jdbcType=TIMESTAMP},
+		</if>
+	</set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  
+  
+  <select id="se" parameterType="com.wenjuan.model.WeiXin" resultType="int">
+    select count(1) from wj_weixin where userid=#{userid} and openId=#{openId}
+  </select>
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+  select * from wj_weixin where openid=#{openid}
+  </select>
+  <update id="UpdateUserid" parameterType="com.wenjuan.model.WeiXin">
+    update wj_weixin set userid=#{userid} where openid=#{openId}
+  </update>
+</mapper>
