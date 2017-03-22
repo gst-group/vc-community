@@ -703,7 +703,7 @@ try {
                 logger.info("----------------------begin--update-----------------------------------------");
                 this.weixinMapper.update(wxUser);
                 logger.info("----------------------end--update-----------------------------------------");
-               User users=userMapper.selectByName(openId);
+                User users=userMapper.selectByName(openId);
                 Map map=new HashMap();
                 map.put("ogid",Integer.parseInt(session.getAttribute("ogid").toString()));
                 map.put("uid",users.getId());
@@ -713,7 +713,8 @@ try {
                     ou.setUid(users.getId());
                     organizationUserService.insert(ou);
                 };
-
+                map.put("userId",users.getId());
+                this.userGroupService.addUserToAllGroup(map);
                 //添加登录信息
                 try {
                     UserLoginLog userLoginLog = new UserLoginLog();
@@ -735,6 +736,8 @@ try {
                     {
                     }
                 }
+
+
                 //添加Cookie
                 Cookie loginCookie = new Cookie("_wx_token",openId);
                 loginCookie.setDomain(domainUrl);

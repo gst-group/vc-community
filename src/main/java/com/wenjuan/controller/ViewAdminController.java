@@ -378,7 +378,6 @@ public class ViewAdminController {
       }
       if(testogid!=0){
         json.put("code","6");
-
         json.put("message",
                 "ogNameAlreadyExist");
       }else{
@@ -423,6 +422,57 @@ public class ViewAdminController {
     }
     return String.valueOf(json);
   }
+
+  //todo 17-3-21 修改管理员信息返回json
+  @RequestMapping("/JsonToAdminUpdate")
+  public @ResponseBody String  adminUpdate(HttpSession session,String Account,String nickName){
+    //返回响应体
+    JSONObject json=new JSONObject();
+    User user=userMapper.selectByName(Account);
+    //查询管理员账号是否已存在
+    if(null!=user){
+      user.setNickname(nickName);
+      session.setAttribute(SESSION_KEY_OPERATOR_RECORD, String.format("修改管理员'%s'信息", user.getName()));
+      if(userMapper.updateByPrimaryKey(user)>0){
+        json.put("code","0");
+        json.put("message","SUCCESS");
+      }
+      else{
+        json.put("code","6");
+        json.put("message","修改个人信息失败");
+      }
+    }else{
+      json.put("code","6");
+      json.put("message","用户名错误");
+    }
+    return String.valueOf(json);
+  }
+
+  //todo 17-3-21 修改管理员信息返回json
+  @RequestMapping("/JsonToAdminUpdatePassword")
+  public @ResponseBody String  adminUpdatePassword(HttpSession session,String Account,String OldPWd,String PWd){
+    //返回响应体
+    JSONObject json=new JSONObject();
+    User user=userMapper.selectByUsernamePassword(Account,OldPWd);
+    //查询管理员账号是否已存在
+    if(null!=user){
+      user.setPassword(PWd);
+      session.setAttribute(SESSION_KEY_OPERATOR_RECORD, String.format("修改管理员'%s'密码", user.getName()));
+      if(userMapper.updateByPrimaryKey(user)>0){
+        json.put("code","0");
+        json.put("message","SUCCESS");
+      }
+      else{
+        json.put("code","6");
+        json.put("message","修改密码失败");
+      }
+    }else{
+      json.put("code","6");
+      json.put("message","用户名或密码错误");
+    }
+    return String.valueOf(json);
+  }
+
   /**
    * 管理员列表
    *

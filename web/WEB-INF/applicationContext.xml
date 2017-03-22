@@ -58,7 +58,8 @@
             <mvc:exclude-mapping path="/admin/getSystem.do"/>
             <mvc:exclude-mapping path="/admin/login.do"/>
             <mvc:exclude-mapping path="/admin/JsonToAdminAdd.do"/>
-
+            <mvc:exclude-mapping path="/admin/JsonToAdminUpdate.do"/>
+            <mvc:exclude-mapping path="/admin/JsonToAdminUpdatePassword.do"/>
             <mvc:exclude-mapping path="/admin/login2.do"/>
             <bean class="com.wenjuan.interceptor.AuthorityAdminInterceptor"/>
         </mvc:interceptor>

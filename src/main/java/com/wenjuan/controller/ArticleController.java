@@ -439,10 +439,14 @@ if(s1.getValue().equals("0")){
       if(s1.getValue().equals("0")) {
         if (s2.getValue().equals("0")) {
           //条件12开启
-          if (content.length() >= Integer.parseInt(s1.getName())) {
-            if (type == 1) {
-              articleComment.setType(2);
+          try {
+            if (content.length() >= Integer.parseInt(s1.getName())) {
+              if (type == 1) {
+                articleComment.setType(2);
+              }
             }
+          } catch (Exception e) {
+            //todo something
           }
         }
       }
