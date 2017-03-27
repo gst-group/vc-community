@@ -467,8 +467,33 @@ public class ViewAdminController {
         json.put("message","修改密码失败");
       }
     }else{
-      json.put("code","6");
+      json.put("code","2");
       json.put("message","用户名或密码错误");
+    }
+    return String.valueOf(json);
+  }
+
+  //todo 17-3-22 管理员密码重置返回json
+  @RequestMapping("/JsonToAdminResetPassword")
+  public @ResponseBody String  adminResetPassword(HttpSession session,String Account,String PWd){
+    //返回响应体
+    JSONObject json=new JSONObject();
+    User user=userMapper.selectByName(Account);
+    //查询管理员账号是否已存在
+    if(null!=user){
+      user.setPassword(PWd);
+      session.setAttribute(SESSION_KEY_OPERATOR_RECORD, String.format("重置管理员'%s'密码", user.getName()));
+      if(userMapper.updateByPrimaryKey(user)>0){
+        json.put("code","0");
+        json.put("message","SUCCESS");
+      }
+      else{
+        json.put("code","6");
+        json.put("message","重置密码失败");
+      }
+    }else{
+      json.put("code","2");
+      json.put("message","用户名错误");
     }
     return String.valueOf(json);
   }
